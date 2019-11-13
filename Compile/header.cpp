@@ -34,6 +34,8 @@ class pickup: public vehicle {
 		}
 };
 
+
+
 struct reservation {
 	int res_number;
 	string name;

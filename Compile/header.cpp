@@ -33,3 +33,7 @@ struct reservation {
 	int vehicle;
 	int seat;
 };
+
+class compact: public vehicle {
+
+};

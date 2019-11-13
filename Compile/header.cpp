@@ -21,3 +21,10 @@ class vehicle {
 	public:
 		void display();
 };
+
+struct reservation {
+	int res_number;
+	string name;
+	int vehicle;
+	int seat;
+};

@@ -22,6 +22,14 @@ class vehicle {
 		void display();
 };
 
+
 class pickup: public vehicle {
 
+}
+
+struct reservation {
+	int res_number;
+	string name;
+	int vehicle;
+	int seat;
 };

@@ -14,3 +14,10 @@ struct seat{
 	bool occupied;
 	int pointVal;
 };
+
+class vehicle {
+	private:
+		string color;
+	public:
+		void display();
+};

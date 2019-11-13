@@ -16,7 +16,7 @@ struct seat{
 };
 
 class vehicle {
-	private:
+	protected:
 		string color;
 	public:
 		void display();
@@ -25,7 +25,7 @@ class vehicle {
 
 class pickup: public vehicle {
 
-}
+};
 
 struct reservation {
 	int res_number;

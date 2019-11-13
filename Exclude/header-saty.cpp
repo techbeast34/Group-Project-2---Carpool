@@ -9,3 +9,8 @@ Date: Nov 13, 2019
 #include <cmath>
 
 using namespace std;
+
+struct seat{
+	bool occupied;
+	int pointVal;
+};

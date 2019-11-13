@@ -14,3 +14,10 @@ struct seat{
 	bool occupied;
 	int pointVal;
 };
+
+struct reservation {
+	int res_number;
+	string name;
+	int vehicle;
+	int seat;
+};

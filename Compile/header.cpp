@@ -18,13 +18,20 @@ struct seat{
 class vehicle {
 	protected:
 		string color;
+		seat seatArr[];
 	public:
 		void display();
 };
 
 
 class pickup: public vehicle {
-
+	public:
+		pickup(){
+			seat newSeat;
+			newSeat.occupied = false;
+			newSeat.pointVal = 5;
+			seatArr[0] = newSeat;
+		}
 };
 
 struct reservation {

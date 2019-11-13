@@ -16,7 +16,7 @@ struct seat{
 };
 
 class vehicle {
-	private:
+	protected:
 		string color;
 	public:
 		void display();

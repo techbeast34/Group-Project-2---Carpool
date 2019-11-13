@@ -21,3 +21,7 @@ class vehicle {
 	public:
 		void display();
 };
+
+class pickup: public vehicle {
+
+};

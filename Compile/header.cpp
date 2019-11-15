@@ -1,8 +1,11 @@
-/*********************
-Name: Satyendra Emani
+/************************************************
+Title: header.cpp
+Name: Rowan D'Ausilio & Satyendra Emani
 Class: CPET-321
 Date: Nov 13, 2019
-**********************/
+Description: The file with all the fucntions and classes defined for
+comp problem solving 2 project
+************************************************/
 
 #include <iostream>
 #include <iomanip>

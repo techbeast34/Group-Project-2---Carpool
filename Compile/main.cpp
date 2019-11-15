@@ -6,12 +6,11 @@ Date: Nov 13, 2019
 Description: Main function file
 ************************************************/
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
+#include "header.cpp"
 
 using namespace std;
 
 int main(){
+	read_reservation();
 	return 0;
 }

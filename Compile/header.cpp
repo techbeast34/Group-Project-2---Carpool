@@ -10,8 +10,11 @@ comp problem solving 2 project
 #include <iostream>  // cin's and cout's
 #include <iomanip>   // for printing things nicely
 #include <fstream>   // needed for file I/O
+#include <cstdlib>   // needed for exit()
 
 using namespace std;
+
+
 
 // struct representing a seat
 struct seat{
@@ -44,10 +47,13 @@ class pickup: public vehicle {
 // reservation strut
 struct reservation {
 	int res_number; // reservation number as an int
+	int point_val;  // point value
 	string name;    // the name of the person
 	int vehicle;    // the vehicle number
 	int seat;       // the seat number
 };
+
+reservation Reservation_Records[23]; // creates and empty array of 24 reservations
 
 // class of compact car, inherits from vehicle
 class compact: public vehicle {
@@ -101,4 +107,45 @@ void vehicle::display(){
 	for(int i = 0; i < 4; i++){
 
 	}
+}
+
+/*
+ * read_reservation()
+ *
+ *    input:       N/A
+ *    output:      An array of reservations with the people and point values filled in
+ *    description: reads the file of people and assigns their names and point values with default
+ *                 values for everything else
+ */
+
+reservation read_reservation() {
+
+	ifstream inFile;
+	inFile.open("seat_credits.txt"); // the name of the file is hardcoded
+
+	if (inFile.fail()) {
+		cout << "\nThe file could not be read. Program terminated. \n" << endl;
+		exit (1);
+	}
+	else {
+		cout << "The file was read sucessfuly. Reservation list being made." << endl;
+	}
+
+	for (int count = 0; count < 48; count++) {
+		getline(inFile, Reservation_Records[count/2].name);
+		inFile >> Reservation_Records[count/2].point_val;
+		inFile.ignore();
+		Reservation_Records[count/2].res_number = count;
+		Reservation_Records[count/2].seat = 5; // default value of 5 since 5 won't be used as a seat
+		Reservation_Records[count/2].vehicle = 9; // default value of 9 since 9 won't be used as a car
+	}
+
+	inFile.close();
+
+	cout << "Test print: " << "Name: " << Reservation_Records[0].name << "Point val: "
+			<< Reservation_Records[0].point_val << "Res number: " << Reservation_Records[0].res_number
+			<< endl;
+	cout << "Test print: " << "Name: " << Reservation_Records[7].name << "Point val: "
+			<< Reservation_Records[7].point_val << "Res number: " << Reservation_Records[7].res_number
+			<< endl;
 }

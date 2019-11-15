@@ -15,3 +15,9 @@
 #endif /* COMPILE_HEADER_H_ */
 
 
+class vehicle;
+class pickup;
+class compact;
+class sedan;
+
+void display(pickup*, compact*, sedan*);

@@ -8,6 +8,7 @@ Date: Nov 13, 2019
 #include <iomanip>
 #include <cmath>
 #include <iterator>
+#include "header.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class vehicle {
 		string color;
 		seat seatArr[4];
 	public:
-		void display();
+		void display(pickup*, compact*, sedan*);
 };
 
 
@@ -81,8 +82,27 @@ class sedan: public vehicle {
 		}
 };
 
-void vehicle::display(){
-	for(int i = 0; i < 4; i++){
+void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]){
+	cout << " Truck  | Compact  |   Sedan  " << endl;
+	cout << "--------+----------+----------" << endl;
+	cout << setw(8) << truckArr[0].color << "|" << setw(10) << compArr[0].color << "|" << setw(10) << sedArr[0].color << endl;
 
-	}
+	cout << "[-] ";
+	if(truckArr[0].seatArr[0].occupied)
+		cout << "[X] " << "|";
+	else
+		cout << "[5] " << "|";
+
+	cout << " [-] ";
+	if(compArr[0].seatArr[0].occupied)
+		cout << "[X]  " << "|";
+	else
+		cout << "[5]  " << "|";
+
+	cout << " [-]";
+	if(sedArr[0].seatArr[0].occupied)
+		cout << "   [X]" << endl;
+	else
+		cout << "   [5]" << endl;
+
 }

@@ -146,7 +146,7 @@ reservation read_reservation() {
 		exit (1);
 	}
 	else {
-		cout << "The file was read sucessfuly. Reservation list being made." << endl;
+		cout << "The file was read successfully. Reservation list being made." << endl;
 	}
 
 	for (int count = 0; count < 48; count++) {

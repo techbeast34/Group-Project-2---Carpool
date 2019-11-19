@@ -14,6 +14,6 @@ Description: Main function file
 using namespace std;
 
 int main(){
-	read_reservation();
+
 	return 0;
 }

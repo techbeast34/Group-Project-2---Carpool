@@ -1,11 +1,11 @@
 /************************************************
-Title: header.cpp
-Name: Rowan D'Ausilio & Satyendra Emani
-Class: CPET-321
-Date: Nov 13, 2019
-Description: The file with all the fucntions and classes defined for
-comp problem solving 2 project
-************************************************/
+ Title: header.cpp
+ Name: Rowan D'Ausilio & Satyendra Emani
+ Class: CPET-321
+ Date: Nov 13, 2019
+ Description: The file with all the fucntions and classes defined for
+ comp problem solving 2 project
+ ************************************************/
 
 #include "header.h"
 #include <iostream>  // cin's and cout's
@@ -15,34 +15,32 @@ comp problem solving 2 project
 
 using namespace std;
 
-
-
 // struct representing a seat
-struct seat{
+struct seat {
 	bool occupied; // boolean if the seat is occupied or not
 	int pointVal;  // the point value of the seat
 };
 
 // class of vehicle
 class vehicle {
-	protected:
-		string color;    // the identifying color of the vehicle
-		seat seatArr[4]; // sets the array of seats to size 4
-	public:
-		void display(pickup*, compact*, sedan*);
+protected:
+	string color;    // the identifying color of the vehicle
+	seat seatArr[4]; // sets the array of seats to size 4
+public:
+	void display(pickup*, compact*, sedan*);
 };
 
 // class of pickup, inherits from vehicle
 class pickup: public vehicle {
-	private:
-		seat frontSeat; // the front passenger seat of the truck
-	public:
-		pickup(string color){ // sets default values of a truck
-			frontSeat.occupied = false;
-			frontSeat.pointVal = 5;
-			seatArr[0] = {frontSeat};
-			this->color = color;
-		}
+private:
+	seat frontSeat; // the front passenger seat of the truck
+public:
+	pickup(string color) { // sets default values of a truck
+		frontSeat.occupied = false;
+		frontSeat.pointVal = 5;
+		seatArr[0] = {frontSeat};
+		this->color = color;
+	}
 };
 
 // reservation strut
@@ -58,43 +56,43 @@ reservation Reservation_Records[23]; // creates and empty array of 24 reservatio
 
 // class of compact car, inherits from vehicle
 class compact: public vehicle {
-	private:
-		seat frontSeat, backLeft, backRight; // has three seats, front, and two back seats
-	public:
-		compact(string color){ // sets the default values of the compact
-			frontSeat.occupied = false;
-			backLeft.occupied = false;
-			backRight.occupied = false;
-			frontSeat.pointVal = 5;
-			backLeft.pointVal = 3;
-			backRight.pointVal = 3;
-			seatArr[0] = frontSeat;
-			seatArr[1] = backLeft;
-			seatArr[2] = backRight;
-			this ->color = color;
-		}
+private:
+	seat frontSeat, backLeft, backRight; // has three seats, front, and two back seats
+public:
+	compact(string color) { // sets the default values of the compact
+		frontSeat.occupied = false;
+		backLeft.occupied = false;
+		backRight.occupied = false;
+		frontSeat.pointVal = 5;
+		backLeft.pointVal = 3;
+		backRight.pointVal = 3;
+		seatArr[0] = frontSeat;
+		seatArr[1] = backLeft;
+		seatArr[2] = backRight;
+		this->color = color;
+	}
 };
 
 // class of sedan car, inherits from vehicle
 class sedan: public vehicle {
-	private:
-		seat frontSeat, backLeft, backRight, backMid; // has four seats, front and three back
-	public:
-		sedan(string color){ // sets the default value of the sedan
-			frontSeat.occupied = false;
-			backLeft.occupied = false;
-			backRight.occupied = false;
-			backMid.occupied = false;
-			frontSeat.pointVal = 5;
-			backLeft.pointVal = 2;
-			backRight.pointVal = 2;
-			backMid.pointVal = 1;
-			seatArr[0] = frontSeat;
-			seatArr[1] = backLeft;
-			seatArr[2] = backRight;
-			seatArr[3] = backMid;
-			this -> color = color;
-		}
+private:
+	seat frontSeat, backLeft, backRight, backMid; // has four seats, front and three back
+public:
+	sedan(string color) { // sets the default value of the sedan
+		frontSeat.occupied = false;
+		backLeft.occupied = false;
+		backRight.occupied = false;
+		backMid.occupied = false;
+		frontSeat.pointVal = 5;
+		backLeft.pointVal = 2;
+		backRight.pointVal = 2;
+		backMid.pointVal = 1;
+		seatArr[0] = frontSeat;
+		seatArr[1] = backLeft;
+		seatArr[2] = backRight;
+		seatArr[3] = backMid;
+		this->color = color;
+	}
 };
 
 /*
@@ -104,25 +102,26 @@ class sedan: public vehicle {
  *    output:      N/A
  *    description: displays the vehicles
  */
-void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]){
+void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 	cout << " Truck  | Compact  |   Sedan  " << endl;
 	cout << "--------+----------+----------" << endl;
-	cout << setw(8) << truckArr[0].color << "|" << setw(10) << compArr[0].color << "|" << setw(10) << sedArr[0].color << endl;
+	cout << setw(8) << truckArr[0].color << "|" << setw(10) << compArr[0].color
+			<< "|" << setw(10) << sedArr[0].color << endl;
 
 	cout << "[-] ";
-	if(truckArr[0].seatArr[0].occupied)
+	if (truckArr[0].seatArr[0].occupied)
 		cout << "[X] " << "|";
 	else
 		cout << "[5] " << "|";
 
 	cout << " [-] ";
-	if(compArr[0].seatArr[0].occupied)
+	if (compArr[0].seatArr[0].occupied)
 		cout << "[X]  " << "|";
 	else
 		cout << "[5]  " << "|";
 
 	cout << " [-]";
-	if(sedArr[0].seatArr[0].occupied)
+	if (sedArr[0].seatArr[0].occupied)
 		cout << "   [X]" << endl;
 	else
 		cout << "   [5]" << endl;
@@ -143,27 +142,71 @@ reservation read_reservation() {
 
 	if (inFile.fail()) {
 		cout << "\nThe file could not be read. Program terminated. \n" << endl;
-		exit (1);
-	}
-	else {
-		cout << "The file was read successfully. Reservation list being made." << endl;
+		exit(1);
+	} else {
+		cout << "The file was read successfully. Reservation list being made."
+				<< endl;
 	}
 
 	for (int count = 0; count < 48; count++) {
-		getline(inFile, Reservation_Records[count/2].name);
-		inFile >> Reservation_Records[count/2].point_val;
+		getline(inFile, Reservation_Records[count / 2].name);
+		inFile >> Reservation_Records[count / 2].point_val;
 		inFile.ignore();
-		Reservation_Records[count/2].res_number = count;
-		Reservation_Records[count/2].seat = 5; // default value of 5 since 5 won't be used as a seat
-		Reservation_Records[count/2].vehicle = 9; // default value of 9 since 9 won't be used as a car
+		Reservation_Records[count / 2].res_number = count;
+		Reservation_Records[count / 2].seat = 5; // default value of 5 since 5 won't be used as a seat
+		Reservation_Records[count / 2].vehicle = 9; // default value of 9 since 9 won't be used as a car
 	}
 
 	inFile.close();
 
-	cout << "Test print: " << "Name: " << Reservation_Records[0].name << "Point val: "
-			<< Reservation_Records[0].point_val << "Res number: " << Reservation_Records[0].res_number
-			<< endl;
-	cout << "Test print: " << "Name: " << Reservation_Records[7].name << "Point val: "
-			<< Reservation_Records[7].point_val << "Res number: " << Reservation_Records[7].res_number
-			<< endl;
+	// TODO - Remove these next couple lines for final. They're there for testing
+	cout << "Test print: " << "Name: " << Reservation_Records[0].name
+			<< "Point val: " << Reservation_Records[0].point_val
+			<< "Res number: " << Reservation_Records[0].res_number << endl;
+	cout << "Test print: " << "Name: " << Reservation_Records[7].name
+			<< "Point val: " << Reservation_Records[7].point_val
+			<< "Res number: " << Reservation_Records[7].res_number << endl;
+
+	return(Reservation_Records[23]);
+}
+
+/*
+ * write_reservations()
+ *
+ *    input:       Array of reservations
+ *    output:      NA
+ *    description: outputs the reservation information to the file
+ */
+
+// TODO - add the vehicle descriptor
+void write_reservations(reservation reservation_array[23]) {
+
+	string admin_password = "password";
+	string entered_password;
+	reservation_array[23] = Reservation_Records[23];
+
+	cout << "Enter administrator password: ";
+	cin >> entered_password;
+
+	if (entered_password == admin_password) {
+		ofstream outFile("all_reservations.txt");
+			if (outFile.is_open()) {
+				for (int count = 0; count < 23; count++) {
+					outFile << "Name: " << Reservation_Records[count].name
+							<< "Point val: " << Reservation_Records[count].point_val
+							<< "Res number: " << Reservation_Records[count].res_number
+							<< endl;
+				}
+			}
+			else {
+				cout << "Unable to open output file." << endl;
+			}
+	}
+	else {
+		cout << "Entered password was incorrect. Returning to menu.";
+		return;
+		// TODO - return to menu here
+	}
+
+
 }

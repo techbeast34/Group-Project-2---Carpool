@@ -1,3 +1,5 @@
 
 *.o
 *.o
+Debug/Compile/header.o
+*.exe

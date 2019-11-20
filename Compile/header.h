@@ -29,6 +29,7 @@ protected:
 	seat seatArr[4]; // sets the array of seats to size 4
 public:
 	void display(pickup parr[], compact carr[], sedan sarr[]);
+	void occupySeat(int num);
 };
 
 // class of pickup, inherits from vehicle
@@ -36,7 +37,7 @@ class pickup: public vehicle {
 private:
 	seat frontSeat; // the front passenger seat of the truck
 public:
-	pickup(string color) { // sets default values of a truck
+	pickup(string color = "Invisible") { // sets default values of a truck
 		frontSeat.occupied = false;
 		frontSeat.pointVal = 5;
 		seatArr[0] = frontSeat;
@@ -59,7 +60,7 @@ class compact: public vehicle {
 private:
 	seat frontSeat, backLeft, backRight; // has three seats, front, and two back seats
 public:
-	compact(string color) { // sets the default values of the compact
+	compact(string color = "Invisible") { // sets the default values of the compact
 		frontSeat.occupied = false;
 		backLeft.occupied = false;
 		backRight.occupied = false;
@@ -78,7 +79,7 @@ class sedan: public vehicle {
 private:
 	seat frontSeat, backLeft, backRight, backMid; // has four seats, front and three back
 public:
-	sedan(string color) { // sets the default value of the sedan
+	sedan(string color = "Invisible") { // sets the default value of the sedan
 		frontSeat.occupied = false;
 		backLeft.occupied = false;
 		backRight.occupied = false;
@@ -95,7 +96,7 @@ public:
 	}
 };
 
-void display(pickup*, compact*, sedan*);
+void display(pickup parr[], compact carr[], sedan sarr[]);
 void read_reservation();
 void write_reservations();
 

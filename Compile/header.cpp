@@ -18,6 +18,15 @@ using namespace std;
 reservation Reservation_Records[24];
 
 /*
+ * vehicle::occupySeat()
+ *
+ *    input:       number of seat(front seat = 1, left back seat = 2, etc.)
+ *    output:      N/A
+ *    description: occupies a seat
+ */
+
+
+/*
  * vehicle::display()
  *
  *    input:       N/A
@@ -27,26 +36,60 @@ reservation Reservation_Records[24];
 void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 	cout << " Truck  | Compact  |   Sedan  " << endl;
 	cout << "--------+----------+----------" << endl;
-	cout << setw(8) << truckArr[0].color << "|" << setw(10) << compArr[0].color
-			<< "|" << setw(10) << sedArr[0].color << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << setw(8) << truckArr[i].color << "|" << setw(10)
+				<< compArr[i].color << "|" << setw(10) << sedArr[i].color
+				<< endl;
 
-	cout << "[-] ";
-	if (truckArr[0].seatArr[0].occupied)
-		cout << "[X] " << "|";
-	else
-		cout << "[5] " << "|";
+		cout << "[-] ";
+		if (truckArr[i].seatArr[0].occupied)
+			cout << "[X] " << "|";
+		else
+			cout << "[5] " << "|";
 
-	cout << " [-] ";
-	if (compArr[0].seatArr[0].occupied)
-		cout << "[X]  " << "|";
-	else
-		cout << "[5]  " << "|";
+		cout << " [-] ";
+		if (compArr[i].seatArr[0].occupied)
+			cout << "[X]  " << "|";
+		else
+			cout << "[5]  " << "|";
 
-	cout << " [-]";
-	if (sedArr[0].seatArr[0].occupied)
-		cout << "   [X]" << endl;
-	else
-		cout << "   [5]" << endl;
+		cout << " [-]";
+		if (sedArr[i].seatArr[0].occupied)
+			cout << "   [X]" << endl;
+		else
+			cout << "   [5]" << endl;
+
+		//------
+
+
+		cout << setw(8) << "" << "|";
+		if (compArr[i].seatArr[1].occupied)
+			cout << " [X] ";
+		else
+			cout << " [3] ";
+
+		if (compArr[i].seatArr[2].occupied)
+			cout << "[X]  " << "|";
+		else
+			cout << "[3]  " << "|";
+
+		//-------
+		if (sedArr[i].seatArr[1].occupied)
+			cout << " [X]";
+		else
+			cout << " [2]";
+
+		if (sedArr[i].seatArr[2].occupied)
+			cout << "[X]";
+		else
+			cout << "[1]";
+
+		if (sedArr[i].seatArr[3].occupied)
+			cout << "[X]" << endl;
+		else
+			cout << "[2]" << endl;
+
+	}
 }
 
 /*

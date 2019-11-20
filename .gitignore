@@ -3,3 +3,4 @@
 *.o
 Debug/Compile/header.o
 *.exe
+.settings/language.settings.xml

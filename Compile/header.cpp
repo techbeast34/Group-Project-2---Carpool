@@ -135,7 +135,10 @@ void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
  *    description: reads the file of people and assigns their names and point values with default
  *                 values for everything else
  */
-reservation read_reservation() {
+void read_reservation() {
+
+	string first_name;
+	string last_name;
 
 	ifstream inFile;
 	inFile.open("seat_credits.txt"); // the name of the file is hardcoded
@@ -148,13 +151,18 @@ reservation read_reservation() {
 				<< endl;
 	}
 
-	for (int count = 0; count < 48; count++) {
-		getline(inFile, Reservation_Records[count / 2].name);
-		inFile >> Reservation_Records[count / 2].point_val;
+
+
+	for (int count = 0; count < 23; count++) {
+
+		getline(inFile, first_name, ' '); // read up to the first space and set to first name
+		getline(inFile, last_name, ' '); // read last name
+		inFile >> Reservation_Records[count].point_val;
 		inFile.ignore();
-		Reservation_Records[count / 2].res_number = count;
-		Reservation_Records[count / 2].seat = 5; // default value of 5 since 5 won't be used as a seat
-		Reservation_Records[count / 2].vehicle = 9; // default value of 9 since 9 won't be used as a car
+		Reservation_Records[count].name = first_name + last_name;
+		Reservation_Records[count].res_number = count;
+		Reservation_Records[count].seat = 5; // default; handled in an if later
+		Reservation_Records[count].vehicle = 9; // default, handled in an if later
 	}
 
 	inFile.close();
@@ -162,12 +170,11 @@ reservation read_reservation() {
 	// TODO - Remove these next couple lines for final. They're there for testing
 	cout << "Test print: " << "Name: " << Reservation_Records[0].name
 			<< "Point val: " << Reservation_Records[0].point_val
-			<< "Res number: " << Reservation_Records[0].res_number << endl;
+			<< " Res number: " << Reservation_Records[0].res_number << endl;
 	cout << "Test print: " << "Name: " << Reservation_Records[7].name
 			<< "Point val: " << Reservation_Records[7].point_val
-			<< "Res number: " << Reservation_Records[7].res_number << endl;
+			<< " Res number: " << Reservation_Records[7].res_number << endl;
 
-	return(Reservation_Records[23]);
 }
 
 /*

@@ -6,3 +6,8 @@ Debug/Compile/header.o
 .settings/language.settings.xml
 Debug/Compile/header.o
 Debug/Group-Project-2---Carpool.exe
+Debug/Compile/main.o
+Debug/Compile/header.o
+*.o
+*.o
+*.exe

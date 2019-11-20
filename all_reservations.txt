@@ -21,3 +21,4 @@ Name: Carl Gray Point val: 1 Res number: 19
 Name: Sam Miller Point val: 5 Res number: 20
 Name: Rob Bell Point val: 2 Res number: 21
 Name: Mary Baker Point val: 5 Res number: 22
+Name: Peter Torres Point val: 6 Res number: 23

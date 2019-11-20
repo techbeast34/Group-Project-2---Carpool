@@ -73,7 +73,7 @@ void read_reservation() {
 				<< endl;
 	}
 
-	for (int count = 0; count < 23; count++) {
+	for (int count = 0; count < 24; count++) {
 
 		getline(inFile, first_name, ' '); // read up to the first space and set to first name
 		getline(inFile, last_name, ' '); // read last name
@@ -117,7 +117,7 @@ void write_reservations() {
 	if (entered_password == admin_password) {
 		ofstream outFile("all_reservations.txt");
 			if (outFile.is_open()) {
-				for (int count = 0; count < 23; count++) {
+				for (int count = 0; count < 24; count++) {
 					outFile << "Name: " << Reservation_Records[count].name
 							<< " Point val: " << Reservation_Records[count].point_val
 							<< " Res number: " << Reservation_Records[count].res_number

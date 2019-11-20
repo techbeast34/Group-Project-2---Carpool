@@ -16,6 +16,7 @@ using namespace std;
 int main(){
 
 	read_reservation();
+	write_reservations();
 
 	return 0;
 }

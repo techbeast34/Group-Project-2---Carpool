@@ -18,6 +18,6 @@ class sedan;
 
 void display(pickup*, compact*, sedan*);
 void read_reservation();
-void write_reservations(reservation*);
+void write_reservations();
 
 #endif /* COMPILE_HEADER_H_ */

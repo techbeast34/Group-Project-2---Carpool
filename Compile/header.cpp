@@ -151,15 +151,13 @@ void read_reservation() {
 				<< endl;
 	}
 
-
-
 	for (int count = 0; count < 23; count++) {
 
 		getline(inFile, first_name, ' '); // read up to the first space and set to first name
 		getline(inFile, last_name, ' '); // read last name
 		inFile >> Reservation_Records[count].point_val;
 		inFile.ignore();
-		Reservation_Records[count].name = first_name + last_name;
+		Reservation_Records[count].name = first_name + ' ' + last_name;
 		Reservation_Records[count].res_number = count;
 		Reservation_Records[count].seat = 5; // default; handled in an if later
 		Reservation_Records[count].vehicle = 9; // default, handled in an if later
@@ -169,10 +167,10 @@ void read_reservation() {
 
 	// TODO - Remove these next couple lines for final. They're there for testing
 	cout << "Test print: " << "Name: " << Reservation_Records[0].name
-			<< "Point val: " << Reservation_Records[0].point_val
+			<< " Point val: " << Reservation_Records[0].point_val
 			<< " Res number: " << Reservation_Records[0].res_number << endl;
 	cout << "Test print: " << "Name: " << Reservation_Records[7].name
-			<< "Point val: " << Reservation_Records[7].point_val
+			<< " Point val: " << Reservation_Records[7].point_val
 			<< " Res number: " << Reservation_Records[7].res_number << endl;
 
 }
@@ -186,11 +184,10 @@ void read_reservation() {
  */
 
 // TODO - add the vehicle descriptor
-void write_reservations(reservation reservation_array[23]) {
+void write_reservations() {
 
 	string admin_password = "password";
 	string entered_password;
-	reservation_array[23] = Reservation_Records[23];
 
 	cout << "Enter administrator password: ";
 	cin >> entered_password;
@@ -200,8 +197,8 @@ void write_reservations(reservation reservation_array[23]) {
 			if (outFile.is_open()) {
 				for (int count = 0; count < 23; count++) {
 					outFile << "Name: " << Reservation_Records[count].name
-							<< "Point val: " << Reservation_Records[count].point_val
-							<< "Res number: " << Reservation_Records[count].res_number
+							<< " Point val: " << Reservation_Records[count].point_val
+							<< " Res number: " << Reservation_Records[count].res_number
 							<< endl;
 				}
 			}

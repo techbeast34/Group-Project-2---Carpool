@@ -22,8 +22,22 @@ reservation Reservation_Records[24];
  *
  *    input:       number of seat(front seat = 1, left back seat = 2, etc.)
  *    output:      N/A
- *    description: occupies a seat
+ *    description: OCCUPY CAR SEAT! WE ARE THE 99%!
  */
+void vehicle::occupySeat(int seat){
+	seatArr[seat].occupied = true;
+}
+
+/*
+ * vehicle::freeSeat()
+ *
+ *    input:       number of seat(front seat = 1, left back seat = 2, etc.)
+ *    output:      N/A
+ *    description: The 1% freed a seat.
+ */
+void vehicle::freeSeat(int seat){
+	seatArr[seat].occupied = false;
+}
 
 /*
  * vehicle::display()

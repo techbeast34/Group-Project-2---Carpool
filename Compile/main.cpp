@@ -33,6 +33,12 @@ int main(){
 
 	v.display(parr, carr, sarr);
 
+	parr[0].occupySeat(0);
+	carr[1].occupySeat(1);
+	v.display(parr, carr, sarr);
+
+	carr[1].freeSeat(1);
+	v.display(parr, carr, sarr);
 
 
 	return 0;

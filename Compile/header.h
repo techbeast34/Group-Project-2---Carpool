@@ -30,6 +30,7 @@ protected:
 public:
 	void display(pickup parr[], compact carr[], sedan sarr[]);
 	void occupySeat(int num);
+	void freeSeat(int num);
 };
 
 // class of pickup, inherits from vehicle

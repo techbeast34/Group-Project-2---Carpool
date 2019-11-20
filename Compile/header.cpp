@@ -136,7 +136,9 @@ void read_reservation() {
 			<< " Res number: " << Reservation_Records[0].res_number << endl;
 	cout << "Test print: " << "Name: " << Reservation_Records[7].name
 			<< " Point val: " << Reservation_Records[7].point_val
-			<< " Res number: " << Reservation_Records[7].res_number << endl;
+			<< " Res number: " << Reservation_Records[7].res_number
+			<< " Seat number: " << Reservation_Records[7].seat
+			<< " Vehicle number: " << Reservation_Records[7].vehicle << endl;
 
 }
 
@@ -148,7 +150,7 @@ void read_reservation() {
  *    description: outputs the reservation information to the file
  */
 
-// TODO - add the vehicle descriptor
+// TODO - edit for the vehicle descriptor
 void write_reservations() {
 
 	string admin_password = "password";
@@ -159,23 +161,31 @@ void write_reservations() {
 
 	if (entered_password == admin_password) {
 		ofstream outFile("all_reservations.txt");
-			if (outFile.is_open()) {
-				for (int count = 0; count < 24; count++) {
-					outFile << "Name: " << Reservation_Records[count].name
-							<< " Point val: " << Reservation_Records[count].point_val
-							<< " Res number: " << Reservation_Records[count].res_number
-							<< endl;
+		if (outFile.is_open()) {
+			for (int count = 0; count < 24; count++) {
+				outFile << "Name: " << Reservation_Records[count].name
+						<< " Point val: "
+						<< Reservation_Records[count].point_val
+						<< " Res number: "
+						<< Reservation_Records[count].res_number;
+				if (Reservation_Records[count].seat == 5) {
+					outFile << " No seat assigned.";
+				} else {
+					outFile << Reservation_Records[count].seat;
+				}
+				if (Reservation_Records[count].vehicle == 9) {
+					outFile << " No vehicle assigned." << endl;
+				} else {
+					outFile << Reservation_Records[count].vehicle;
 				}
 			}
-			else {
-				cout << "Unable to open output file." << endl;
-			}
-	}
-	else {
+		} else {
+			cout << "Unable to open output file." << endl;
+		}
+	} else {
 		cout << "Entered password was incorrect. Returning to menu.";
 		return;
 		// TODO - return to menu here
 	}
-
 
 }

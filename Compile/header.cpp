@@ -38,7 +38,7 @@ public:
 	pickup(string color) { // sets default values of a truck
 		frontSeat.occupied = false;
 		frontSeat.pointVal = 5;
-		seatArr[0] = {frontSeat};
+		seatArr[0] = frontSeat;
 		this->color = color;
 	}
 };

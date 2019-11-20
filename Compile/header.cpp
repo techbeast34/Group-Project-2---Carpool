@@ -25,7 +25,6 @@ reservation Reservation_Records[24];
  *    description: occupies a seat
  */
 
-
 /*
  * vehicle::display()
  *

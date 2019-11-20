@@ -11,4 +11,6 @@ Debug/Compile/header.o
 *.o
 *.o
 *.exe
+
 *.o
+*.exe

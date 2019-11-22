@@ -24,7 +24,7 @@ reservation Reservation_Records[24];
  *    output:      N/A
  *    description: OCCUPY CAR SEAT! WE ARE THE 99%!
  */
-void vehicle::occupySeat(int seat){
+void vehicle::occupySeat(int seat) {
 	seatArr[seat].occupied = true;
 }
 
@@ -35,7 +35,7 @@ void vehicle::occupySeat(int seat){
  *    output:      N/A
  *    description: The 1% freed a seat.
  */
-void vehicle::freeSeat(int seat){
+void vehicle::freeSeat(int seat) {
 	seatArr[seat].occupied = false;
 }
 
@@ -73,7 +73,6 @@ void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 			cout << "   [5]" << endl;
 
 		//------
-
 
 		cout << setw(8) << "" << "|";
 		if (compArr[i].seatArr[1].occupied)
@@ -138,7 +137,7 @@ void read_reservation() {
 		Reservation_Records[count].name = first_name + ' ' + last_name;
 		Reservation_Records[count].res_number = count;
 		Reservation_Records[count].seat = 5; // default; handled in an if later
-		Reservation_Records[count].vehicle = 9; // default, handled in an if later
+		Reservation_Records[count].vehicle = " Car not assigned."; // default, handled in an if later
 	}
 
 	inFile.close();
@@ -151,7 +150,7 @@ void read_reservation() {
 			<< " Point val: " << Reservation_Records[7].point_val
 			<< " Res number: " << Reservation_Records[7].res_number
 			<< " Seat number: " << Reservation_Records[7].seat
-			<< " Vehicle number: " << Reservation_Records[7].vehicle << endl;
+			<< " Vehicle: " << Reservation_Records[7].vehicle << endl;
 
 }
 
@@ -186,11 +185,7 @@ void write_reservations() {
 				} else {
 					outFile << Reservation_Records[count].seat;
 				}
-				if (Reservation_Records[count].vehicle == 9) {
-					outFile << " No vehicle assigned." << endl;
-				} else {
-					outFile << Reservation_Records[count].vehicle;
-				}
+				outFile << Reservation_Records[count].vehicle << endl;
 			}
 		} else {
 			cout << "Unable to open output file." << endl;
@@ -203,6 +198,15 @@ void write_reservations() {
 
 }
 
+/*
+ * create_reservation()
+ *
+ *    input:       NA
+ *    output:      NA
+ *    description: Finds the person in the database and edits the car that they are in as well
+ *                 as the seat they are going to sit in
+ */
+
 void create_reservation() {
 	string passenger_name; // user entered person's name
 
@@ -211,9 +215,12 @@ void create_reservation() {
 
 	for (int count = 0; count < 24; count++) {
 		if (passenger_name == Reservation_Records[count].name) {
-			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points." << endl;
+			cout << Reservation_Records[count].name << " has "
+					<< Reservation_Records[count].point_val << " points."
+					<< endl;
 			if (Reservation_Records[count].point_val == 0) {
-				cout << "ERROR: No points. Find your own transportation." << endl;
+				cout << "ERROR: No points. Find your own transportation."
+						<< endl;
 			} else {
 				// TODO - display cars
 				// TODO - assign seat by category or specific seat in vehicle
@@ -222,6 +229,92 @@ void create_reservation() {
 			cout << "ERROR: Name entered not in database." << endl;
 		}
 	}
+}
+
+/*
+ * modify_reservations()
+ *
+ *    input:       NA
+ *    output:      NA
+ *    description: modifies the reservation by the reservation number
+ */
+
+void modify_reservation() {
+	int res_number; // user entered reservation number
+	string car;
+	int seat_number, current_seat;
+
+	cout << "Enter reservation number. ";
+	cin >> res_number;
+
+	for (int count = 0; count < 24; count++) {
+		if (res_number == Reservation_Records[count].res_number) {
+			cout << "Enter vehicle wanted: ";
+			cin >> car;
+			if (Reservation_Records[count].vehicle == car) {
+				cout << "ERROR: Already in vehicle. Try again." << endl;
+			} else {
+				Reservation_Records[count].vehicle = car;
+
+				cout << "Checking available points..." << endl;
+
+				current_seat = Reservation_Records[count].seat;
+
+				// TODO -- give back points based on seat currently in
+
+				/*
+				 * if seat is front seat, add 5 to points
+				 * if seat is back seat of a compact, add 3 to points
+				 * if seat is back seat of sedan add 2
+				 * if seat is bitch seat of sedan add 1
+				 */
+
+				cout << "Enter seat number wanted: ";
+				cin >> seat_number;
+
+				// TODO -- Seat empty or not
+
+				cout << "Seat unavailable. Already taken. Choose another seat." << endl;
+
+			}
+		} else {
+			cout
+					<< "ERROR: Check reservation number. Number does not exist in database."
+					<< endl;
+		}
+	}
 
 }
 
+/*
+ * delete_reservations()
+ *
+ *    input:       NA
+ *    output:      NA
+ *    description: delete's the reservation from the database
+ */
+
+void delete_reservation() {
+	int delete_res;
+	int old_seat;
+
+	cout << "Enter reservation to be deleted: ";
+	cin >> delete_res;
+
+	if(delete_res == 23) { // its the last value in the array
+		return;
+	}
+
+	for (int count = 0; count < 24; count++) {
+		if (Reservation_Records[count].res_number == delete_res) {
+			old_seat = Reservation_Records[count].seat;
+			Reservation_Records[count].seat = 5; // unassigned
+			Reservation_Records[count].vehicle = " Car not assigned.";
+
+
+			// TODO - This should work unless the object in the array has to literally be deleted
+		} else {
+			cout << "ERROR: Reservation does not exist." << endl;
+		}
+	}
+}

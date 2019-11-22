@@ -202,3 +202,26 @@ void write_reservations() {
 	}
 
 }
+
+void create_reservation() {
+	string passenger_name; // user entered person's name
+
+	cout << "Enter passenger's name to create the reservation: ";
+	cin >> passenger_name;
+
+	for (int count = 0; count < 24; count++) {
+		if (passenger_name == Reservation_Records[count].name) {
+			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points." << endl;
+			if (Reservation_Records[count].point_val == 0) {
+				cout << "ERROR: No points. Find your own transportation." << endl;
+			} else {
+				// TODO - display cars
+				// TODO - assign seat by category or specific seat in vehicle
+			}
+		} else {
+			cout << "ERROR: Name entered not in database." << endl;
+		}
+	}
+
+}
+

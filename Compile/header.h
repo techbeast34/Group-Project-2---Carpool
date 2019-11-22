@@ -31,6 +31,7 @@ public:
 	void display(pickup parr[], compact carr[], sedan sarr[]);
 	void occupySeat(int num);
 	void freeSeat(int num);
+	friend void create_reservation();
 };
 
 // class of pickup, inherits from vehicle

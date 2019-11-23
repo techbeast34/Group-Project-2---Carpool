@@ -244,6 +244,7 @@ void create_reservation() {
 						<< endl;
 				cin >> menu_sel;
 				cin.ignore();
+				bool match = false;
 				switch (menu_sel) {
 				case 'c':
 				case 'C': {
@@ -252,7 +253,6 @@ void create_reservation() {
 							<< endl; //TODO: add error checks to make sure they have enough points.
 					cin >> submenu_sel;
 					cin.ignore();
-					bool match = false;
 					switch (submenu_sel) {
 					case 'f':
 					case 'F': {
@@ -306,150 +306,153 @@ void create_reservation() {
 								match = true;
 							}
 						}
+					}
 						break;
-					} // submenu case end
-					case 's':
-					case 'S': {
-						//TODO: add error checks to ensure the user has enough points
-						cout
-								<< "Which car type? (P)ickup, (C)ompact, or (S)edan?";
-						cin >> submenu_sel;
-						cin.ignore();
-						switch (submenu_sel) {
-						case 'p':
-						case 'P': {
-							cout << "Which color? ";
-							getline(cin, car_color);
-							for (int i = 0; i < 3 || !match; i++) {
-								if (car_color == parr[i].color) {
-									if (!parr[i].seatArr[0].occupied) {
-										parr[i].occupySeat(0);
+
+					}
+					break; // submenu case end
+				}
+				case 's':
+				case 'S': {
+					//TODO: add error checks to ensure the user has enough points
+					cout << "Which car type? (P)ickup, (C)ompact, or (S)edan?";
+					cin >> submenu_sel;
+					cin.ignore();
+					switch (submenu_sel) {
+					case 'p':
+					case 'P': {
+						cout << "Which color? ";
+						cin >> car_color;
+						//cout << parr[2].color;
+						//getline(cin, car_color);
+						for (int i = 0; i < 3; i++) { // for (int i = 0; i < 3 || !match; i++)
+							if (car_color == parr[i].color) {
+								if (!parr[i].seatArr[0].occupied) {
+									parr[i].occupySeat(0);
+									Reservation_Records[count].point_val -= 5;
+									match = true;
+								} else
+									cout << "ERROR! Seat not available."
+											<< endl;
+							} else
+								cout << "ERROR! Car not found." << endl;
+						}
+					}
+						break;
+					case 'c':
+					case 'C': {
+						cout << "Which color? ";
+						cin >> car_color;
+						//getline(cin, car_color);
+						for (int i = 0; i < 3 || !match; i++) {
+							if (car_color == carr[i].color) {
+								cout << "Which seat? (F)ront or (B)ack? ";
+								cin >> seat_sel;
+								cin.ignore();
+								switch (seat_sel) {
+								case 'f':
+								case 'F': {
+									if (!carr[i].seatArr[0].occupied) {
+										carr[i].occupySeat(0);
 										Reservation_Records[count].point_val -=
 												5;
 										match = true;
 									} else
 										cout << "ERROR! Seat not available."
 												<< endl;
-								} else
-									cout << "ERROR! Car not found." << endl;
-							}
-						}
-							break;
-						case 'c':
-						case 'C': {
-							cout << "Which color? ";
-							getline(cin, car_color);
-							for (int i = 0; i < 3 || !match; i++) {
-								if (car_color == carr[i].color) {
-									cout << "Which seat? (F)ront or (B)ack? ";
-									cin >> seat_sel;
-									cin.ignore();
-									switch (seat_sel) {
-									case 'f':
-									case 'F': {
-										if (!carr[i].seatArr[0].occupied) {
-											carr[i].occupySeat(0);
-											Reservation_Records[count].point_val -=
-													5;
-											match = true;
-										} else
-											cout << "ERROR! Seat not available."
-													<< endl;
-									}
-										break;
-									case 'b':
-									case 'B': {
-										if (!carr[i].seatArr[1].occupied) {
-											carr[i].occupySeat(1);
-											Reservation_Records[count].point_val -=
-													3;
-											match = true;
-										} else if (!carr[i].seatArr[2].occupied) {
-											carr[i].occupySeat(2);
-											Reservation_Records[count].point_val -=
-													3;
-											match = true;
-										} else
-											cout << "ERROR! Seat not available."
-													<< endl;
-									}
-										break;
-									}
+								}
 									break;
-								} else {
-									cout << "ERROR! Car not found." << endl;
-
+								case 'b':
+								case 'B': {
+									if (!carr[i].seatArr[1].occupied) {
+										carr[i].occupySeat(1);
+										Reservation_Records[count].point_val -=
+												3;
+										match = true;
+									} else if (!carr[i].seatArr[2].occupied) {
+										carr[i].occupySeat(2);
+										Reservation_Records[count].point_val -=
+												3;
+										match = true;
+									} else
+										cout << "ERROR! Seat not available."
+												<< endl;
+								}
+									break;
 								}
 								break;
+							} else {
+								cout << "ERROR! Car not found." << endl;
+
 							}
-							case 's':
-							case 'S':
-							cout << "Which color? ";
-							getline(cin, car_color);
-							for (int i = 0; i < 3 || !match; i++) {
-								if (car_color == sarr[i].color) {
-									cout
-											<< "Which seat? (F)ront, (B)ack, or (M)iddle?";
-									switch (seat_sel) {
-									case 'f':
-									case 'F':
-										if (!sarr[i].seatArr[0].occupied) {
-											sarr[i].occupySeat(0);
-											Reservation_Records[count].point_val -=
-													5;
-											match = true;
-										} else
-											cout << "ERROR! Seat not available."
-													<< endl;
-										break;
-									case 'b':
-									case 'B':
-										if (!sarr[i].seatArr[1].occupied) {
-											sarr[i].occupySeat(1);
-											Reservation_Records[count].point_val -=
-													2;
-											match = true;
-										} else if (!carr[i].seatArr[2].occupied) {
-											sarr[i].occupySeat(2);
-											Reservation_Records[count].point_val -=
-													2;
-											match = true;
-										} else
-											cout << "ERROR! Seat not available."
-													<< endl;
-										break;
-									case 'm':
-									case 'M':
-										if (!sarr[i].seatArr[3].occupied) {
-											sarr[i].occupySeat(3);
-											Reservation_Records[count].point_val -=
-													1;
-											match = true;
-										} else
-											cout << "ERROR! Seat not available."
-													<< endl;
-										break;
-									}
-								} else
-									cout << "ERROR! Car not found." << endl;
-								return;
-							}
+							break;
 						}
+						case 's':
+						case 'S':
+						cout << "Which color? ";
+						cin >> car_color;
+						//getline(cin, car_color);
+						for (int i = 0; i < 3 || !match; i++) {
+							if (car_color == sarr[i].color) {
+								cout
+										<< "Which seat? (F)ront, (B)ack, or (M)iddle?";
+								switch (seat_sel) {
+								case 'f':
+								case 'F':
+									if (!sarr[i].seatArr[0].occupied) {
+										sarr[i].occupySeat(0);
+										Reservation_Records[count].point_val -=
+												5;
+										match = true;
+									} else
+										cout << "ERROR! Seat not available."
+												<< endl;
+									break;
+								case 'b':
+								case 'B':
+									if (!sarr[i].seatArr[1].occupied) {
+										sarr[i].occupySeat(1);
+										Reservation_Records[count].point_val -=
+												2;
+										match = true;
+									} else if (!carr[i].seatArr[2].occupied) {
+										sarr[i].occupySeat(2);
+										Reservation_Records[count].point_val -=
+												2;
+										match = true;
+									} else
+										cout << "ERROR! Seat not available."
+												<< endl;
+									break;
+								case 'm':
+								case 'M':
+									if (!sarr[i].seatArr[3].occupied) {
+										sarr[i].occupySeat(3);
+										Reservation_Records[count].point_val -=
+												1;
+										match = true;
+									} else
+										cout << "ERROR! Seat not available."
+												<< endl;
+									break;
+								}
+							} else
+								cout << "ERROR! Car not found." << endl;
+							return;
 						}
-						break;
-					} // end of case s for selecting own seat
-						break;
-					default:
-						;
-					} // end of sub menu switch
-				} // end case c
+					}
+					}
+					break;
+				} // end of case s for selecting own seat
 					break;
 				default:
 					;
-				} // menu select
-				  // else when points are greater than 0
-			} // if passenger is in database
-		} else { // unsure why this is getitng hit even when it goes through the if
+				} // end of sub menu switch
+			} // end case c
+			break;
+		} // menu select
+		  // else when points are greater than 0 // if passenger is in database
+		else { // unsure why this is getitng hit even when it goes through the if
 			cout << "ERROR: Name entered not in database." << endl;
 			cout << "Name entered was: " << passenger_name << endl;
 			v.display(parr, carr, sarr);

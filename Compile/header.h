@@ -101,5 +101,6 @@ public:
 void display(pickup parr[], compact carr[], sedan sarr[]);
 void read_reservation();
 void write_reservations();
+void create_reservation();
 
 #endif /* COMPILE_HEADER_H_ */

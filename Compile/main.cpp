@@ -13,12 +13,10 @@ Description: Main function file
 
 using namespace std;
 
-int main(){
+int main() {
 
 	read_reservation();
-	write_reservations();
-
-
+	create_reservation();
 
 	return 0;
 }

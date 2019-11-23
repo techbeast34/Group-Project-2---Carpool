@@ -217,14 +217,17 @@ void write_reservations() {
  */
 
 void create_reservation() {
-	string passenger_name; // user entered person's name
-	char menu_sel;
-	char submenu_sel;
-	char seat_sel;
-	string car_color;
+	string passenger_first; // user entered person's name
+	string passenger_last;  // user entered last name
+	string passenger_name;  // full name
+	char menu_sel;          //menu select
+	char submenu_sel;       // sub menu select
+	char seat_sel;          // seat selection
+	string car_color;       // car color
 
 	cout << "Enter passenger's name to create the reservation: ";
-	cin >> passenger_name;
+	cin >> passenger_first >> passenger_last;
+	passenger_name = passenger_first + " " + passenger_last;
 
 	for (int count = 0; count < 24; count++) {
 		if (passenger_name == Reservation_Records[count].name) {
@@ -243,7 +246,7 @@ void create_reservation() {
 				cin.ignore();
 				switch (menu_sel) {
 				case 'c':
-				case 'C':
+				case 'C': {
 					cout
 							<< "What seat do you want? (F)ront, (B)ack, or (M)iddle?"
 							<< endl; //TODO: add error checks to make sure they have enough points.
@@ -252,7 +255,7 @@ void create_reservation() {
 					bool match = false;
 					switch (submenu_sel) {
 					case 'f':
-					case 'F':
+					case 'F': {
 						for (int i = 0; (i < 3) || !match; i++) {
 							if (!parr[i].seatArr[0].occupied) {
 								parr[i].occupySeat(0);
@@ -267,9 +270,11 @@ void create_reservation() {
 						}
 						if (match)
 							Reservation_Records[count].point_val -= 5; //TODO: change these to veharr[i].seatArr[i].pointVal for maintainability
+
+					}
 						break;
 					case 'b':
-					case 'B':
+					case 'B': {
 						for (int i = 0; (i < 3) || !match; i++) {
 							if (!carr[i].seatArr[1].occupied) {
 								carr[i].occupySeat(1);
@@ -289,9 +294,11 @@ void create_reservation() {
 								match = true;
 							}
 						}
+
+					}
 						break;
 					case 'm':
-					case 'M':
+					case 'M': {
 						for (int i = 0; (i < 3) || !match; i++) {
 							if (!sarr[i].seatArr[3].occupied) {
 								Reservation_Records[count].point_val -= 1;
@@ -300,16 +307,17 @@ void create_reservation() {
 							}
 						}
 						break;
-						break;
+					} // submenu case end
 					case 's':
-					case 'S': //TODO: add error checks to ensure the user has enough points
+					case 'S': {
+						//TODO: add error checks to ensure the user has enough points
 						cout
 								<< "Which car type? (P)ickup, (C)ompact, or (S)edan?";
 						cin >> submenu_sel;
 						cin.ignore();
 						switch (submenu_sel) {
 						case 'p':
-						case 'P':
+						case 'P': {
 							cout << "Which color? ";
 							getline(cin, car_color);
 							for (int i = 0; i < 3 || !match; i++) {
@@ -325,9 +333,10 @@ void create_reservation() {
 								} else
 									cout << "ERROR! Car not found." << endl;
 							}
+						}
 							break;
 						case 'c':
-						case 'C':
+						case 'C': {
 							cout << "Which color? ";
 							getline(cin, car_color);
 							for (int i = 0; i < 3 || !match; i++) {
@@ -337,7 +346,7 @@ void create_reservation() {
 									cin.ignore();
 									switch (seat_sel) {
 									case 'f':
-									case 'F':
+									case 'F': {
 										if (!carr[i].seatArr[0].occupied) {
 											carr[i].occupySeat(0);
 											Reservation_Records[count].point_val -=
@@ -346,9 +355,10 @@ void create_reservation() {
 										} else
 											cout << "ERROR! Seat not available."
 													<< endl;
+									}
 										break;
 									case 'b':
-									case 'B':
+									case 'B': {
 										if (!carr[i].seatArr[1].occupied) {
 											carr[i].occupySeat(1);
 											Reservation_Records[count].point_val -=
@@ -362,15 +372,18 @@ void create_reservation() {
 										} else
 											cout << "ERROR! Seat not available."
 													<< endl;
+									}
 										break;
 									}
-								} else
+									break;
+								} else {
 									cout << "ERROR! Car not found." << endl;
 
+								}
+								break;
 							}
-							break;
-						case 's':
-						case 'S':
+							case 's':
+							case 'S':
 							cout << "Which color? ";
 							getline(cin, car_color);
 							for (int i = 0; i < 3 || !match; i++) {
@@ -419,19 +432,33 @@ void create_reservation() {
 									}
 								} else
 									cout << "ERROR! Car not found." << endl;
-
+								return;
 							}
-							break;
+						}
 						}
 						break;
-					}
-
-				}
-			}
-		} else {
+					} // end of case s for selecting own seat
+						break;
+					default:
+						;
+					} // end of sub menu switch
+				} // end case c
+					break;
+				default:
+					;
+				} // menu select
+				  // else when points are greater than 0
+			} // if passenger is in database
+		} else { // unsure why this is getitng hit even when it goes through the if
 			cout << "ERROR: Name entered not in database." << endl;
+			cout << "Name entered was: " << passenger_name << endl;
+			v.display(parr, carr, sarr);
+			return;
 		}
 	}
+	// for loop to go through database
+
+	return;
 }
 
 /*
@@ -463,7 +490,7 @@ void modify_reservation() {
 
 				current_seat = Reservation_Records[count].seat;
 
-				// TODO -- give back points based on seat currently in
+// TODO -- give back points based on seat currently in
 
 				/*
 				 * if seat is front seat, add 5 to points
@@ -475,7 +502,7 @@ void modify_reservation() {
 				cout << "Enter seat number wanted: ";
 				cin >> seat_number;
 
-				// TODO -- Seat empty or not
+// TODO -- Seat empty or not
 
 				cout << "Seat unavailable. Already taken. Choose another seat."
 						<< endl;
@@ -487,7 +514,6 @@ void modify_reservation() {
 					<< endl;
 		}
 	}
-
 }
 
 /*
@@ -515,7 +541,7 @@ void delete_reservation() {
 			Reservation_Records[count].seat = 5; // unassigned
 			Reservation_Records[count].vehicle = " Car not assigned.";
 
-			// TODO - This should work unless the object in the array has to literally be deleted
+// TODO - This should work unless the object in the array has to literally be deleted
 		} else {
 			cout << "ERROR: Reservation does not exist." << endl;
 		}

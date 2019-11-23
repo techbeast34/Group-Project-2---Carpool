@@ -150,17 +150,6 @@ void read_reservation() {
 	}
 
 	inFile.close();
-
-	// TODO - Remove these next couple lines for final. They're there for testing
-	cout << "Test print: " << "Name: " << Reservation_Records[0].name
-			<< " Point val: " << Reservation_Records[0].point_val
-			<< " Res number: " << Reservation_Records[0].res_number << endl;
-	cout << "Test print: " << "Name: " << Reservation_Records[7].name
-			<< " Point val: " << Reservation_Records[7].point_val
-			<< " Res number: " << Reservation_Records[7].res_number
-			<< " Seat number: " << Reservation_Records[7].seat << " Vehicle: "
-			<< Reservation_Records[7].vehicle << endl;
-
 }
 
 /*
@@ -322,20 +311,29 @@ void create_reservation() {
 					case 'p':
 					case 'P': {
 						cout << "Which color? ";
-						cin >> car_color;
+						//cin >> car_color;
 						//cout << parr[2].color;
-						//getline(cin, car_color);
-						for (int i = 0; i < 3; i++) { // for (int i = 0; i < 3 || !match; i++)
-							if (car_color == parr[i].color) {
+						std::getline(cin, car_color);
+						for (int i = 0; i < 3 ; i++) { // this isn't incrementing
+							cout << 'F';
+							if (parr[i].color == car_color) {
+								cout << "color matched"; // TODO - for testing
+								cout << parr[i].color; // this doesnt print anything for some reason
 								if (!parr[i].seatArr[0].occupied) {
 									parr[i].occupySeat(0);
 									Reservation_Records[count].point_val -= 5;
+									Reservation_Records[count].seat = 0; // set to front seat
+									Reservation_Records[count].vehicle =
+											parr[i].color + " " + "pickup."; // set assigned vehicle to color pickup
 									match = true;
 								} else
 									cout << "ERROR! Seat not available."
 											<< endl;
-							} else
+								return;
+							} else {
 								cout << "ERROR! Car not found." << endl;
+								return;
+							}
 						}
 					}
 						break;

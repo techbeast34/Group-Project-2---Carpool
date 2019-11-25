@@ -29,6 +29,7 @@ protected:
 	seat seatArr[4]; // sets the array of seats to size 4
 public:
 	void display(pickup parr[], compact carr[], sedan sarr[]);
+	void write_reservations(pickup parr[], compact carr[], sedan sarr[]);
 	void occupySeat(int num);
 	void freeSeat(int num);
 	friend void create_reservation();
@@ -99,8 +100,9 @@ public:
 };
 
 void display(pickup parr[], compact carr[], sedan sarr[]);
+void write_reservations(pickup parr[], compact carr[], sedan sarr[]);
 void read_reservation();
-void write_reservations();
 void create_reservation();
+void update_points();
 
 #endif /* COMPILE_HEADER_H_ */

@@ -274,19 +274,14 @@ void create_reservation() {
 
 	for (int count = 0; count < 24; count++) {
 		if (passenger_name == Reservation_Records[count].name) {
-			cout << Reservation_Records[count].name << " has "
-					<< Reservation_Records[count].point_val << " points."
-					<< endl;
+			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points." << endl;
 			nameMatch = true;
 
 			if (Reservation_Records[count].point_val == 0) {
-				cout << "ERROR: No points. Find your own transportation."
-						<< endl;
+				cout << "ERROR: No points. Find your own transportation." << endl;
 			} else {
 				v.display(parr, carr, sarr);
-				cout
-						<< "Do you want to select by (C)ategory, or by (S)pecific seat?"
-						<< endl;
+				cout << "Do you want to select by (C)ategory, or by (S)pecific seat?" << endl;
 				cin >> menu_sel;
 				cin.ignore();
 
@@ -296,63 +291,89 @@ void create_reservation() {
 				switch (menu_sel) {
 				case 'c':
 				case 'C': {
-					cout
-							<< "What seat do you want? (F)ront, (B)ack, or (M)iddle?"
-							<< endl; //TODO: add error checks to make sure they have enough points.
+					cout << "What seat do you want? (F)ront, (B)ack, or (M)iddle?" << endl;
 					cin >> submenu_sel;
 					cin.ignore();
 					switch (submenu_sel) {
 					case 'f':
 					case 'F': {
-						for (int i = 0; (i < 3) && !match; i++) {
-							if (!parr[i].seatArr[0].occupied && !match) {
-								parr[i].occupySeat(0);
-								match = true;
-							} else if (!carr[i].seatArr[0].occupied && !match) {
-								carr[i].occupySeat(0);
-								match = true;
-							} else if (!sarr[i].seatArr[0].occupied && !match) {
-								sarr[i].occupySeat(0);
-								match = true;
+						if (Reservation_Records[count].point_val >= 5) {
+							for (int i = 0; (i < 3) && !match; i++) {
+								if (!parr[i].seatArr[0].occupied && !match) {
+									parr[i].occupySeat(0);
+									Reservation_Records[count].vehicle = parr[i].color + " pickup.";
+									match = true;
+								} else if (!carr[i].seatArr[0].occupied && !match) {
+									carr[i].occupySeat(0);
+									Reservation_Records[count].vehicle = carr[i].color + " compact.";
+									match = true;
+								} else if (!sarr[i].seatArr[0].occupied && !match) {
+									sarr[i].occupySeat(0);
+									Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+									match = true;
+								}
 							}
+							if (match) {
+								Reservation_Records[count].seat = 0; // set to front seat
+								Reservation_Records[count].point_val -= 5; //TODO: change these to veharr[i].seatArr[i].pointVal for maintainability
+							}
+						} else {
+							cout << "ERROR! Not enough points for a front seat." << endl;
 						}
-						if (match)
-							Reservation_Records[count].point_val -= 5; //TODO: change these to veharr[i].seatArr[i].pointVal for maintainability
+
 
 					}
 						break;
 					case 'b':
 					case 'B': {
-						for (int i = 0; (i < 3) && !match; i++) {
-							if (!carr[i].seatArr[1].occupied && !match) {
-								carr[i].occupySeat(1);
-								Reservation_Records[count].point_val -= 3;
-								match = true;
-							} else if (!carr[i].seatArr[2].occupied && !match) {
-								carr[i].occupySeat(2);
-								Reservation_Records[count].point_val -= 3;
-								match = true;
-							} else if (!sarr[i].seatArr[1].occupied && !match) {
-								sarr[i].occupySeat(1);
-								Reservation_Records[count].point_val -= 2;
-								match = true;
-							} else if (!sarr[i].seatArr[2].occupied && !match) {
-								sarr[i].occupySeat(2);
-								Reservation_Records[count].point_val -= 2;
-								match = true;
+						if (Reservation_Records[count].point_val >= 3) {
+							for (int i = 0; (i < 3) && !match; i++) {
+								if (!carr[i].seatArr[1].occupied && !match) {
+									carr[i].occupySeat(1);
+									Reservation_Records[count].point_val -= 3;
+									Reservation_Records[count].seat = 1;
+									Reservation_Records[count].vehicle = carr[i].color + " compact.";
+									match = true;
+								} else if (!carr[i].seatArr[2].occupied && !match) {
+									carr[i].occupySeat(2);
+									Reservation_Records[count].point_val -= 3;
+									Reservation_Records[count].seat = 2;
+									Reservation_Records[count].vehicle = carr[i].color + " compact.";
+									match = true;
+								} else if (!sarr[i].seatArr[1].occupied && !match) {
+									sarr[i].occupySeat(1);
+									Reservation_Records[count].point_val -= 2;
+									Reservation_Records[count].seat = 1;
+									Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+									match = true;
+								} else if (!sarr[i].seatArr[2].occupied && !match) {
+									sarr[i].occupySeat(2);
+									Reservation_Records[count].point_val -= 2;
+									Reservation_Records[count].seat = 2;
+									Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+									match = true;
+								}
 							}
+						} else {
+							cout << "ERROR! Not enough points for a back seat." << endl;
 						}
 
 					}
 						break;
 					case 'm':
 					case 'M': {
-						for (int i = 0; (i < 3) && !match; i++) {
-							if (!sarr[i].seatArr[3].occupied && !match) {
-								Reservation_Records[count].point_val -= 1;
-								sarr[i].occupySeat(3);
-								match = true;
+						if (Reservation_Records[count].point_val >= 1) {
+							for (int i = 0; (i < 3) && !match; i++) {
+								if (!sarr[i].seatArr[3].occupied && !match) {
+									Reservation_Records[count].point_val -= 1;
+									Reservation_Records[count].seat = 3;
+									Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+									sarr[i].occupySeat(3);
+									match = true;
+								}
 							}
+						} else {
+							cout << "ERROR! Not enough points for a middle seat." << endl;
 						}
 					}
 						break;
@@ -375,17 +396,15 @@ void create_reservation() {
 						for (int i = 0; i < 3 && !colorMatch; i++) {
 							if (parr[i].color == car_color) {
 								colorMatch = true;
-								if (!parr[i].seatArr[0].occupied && !match) {
+								if (!parr[i].seatArr[0].occupied && !match && (Reservation_Records[count].point_val >= 5)) {
 									parr[i].occupySeat(0);
 									Reservation_Records[count].point_val -= 5;
 									Reservation_Records[count].seat = 0; // set to front seat
-									Reservation_Records[count].vehicle =
-											parr[i].color + " " + "pickup."; // set assigned vehicle to color pickup
+									Reservation_Records[count].vehicle = parr[i].color + " pickup."; // set assigned vehicle to color pickup
 									match = true;
 									v.display(parr, carr, sarr);
 								} else
-									cout << "ERROR! Seat not available."
-											<< endl;
+									cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 								return;
 							}
 
@@ -409,34 +428,32 @@ void create_reservation() {
 								switch (seat_sel) {
 								case 'f':
 								case 'F': {
-									if (!carr[i].seatArr[0].occupied
-											&& !match) {
+									if (!carr[i].seatArr[0].occupied && !match && (Reservation_Records[count].point_val >= 5)) {
 										carr[i].occupySeat(0);
-										Reservation_Records[count].point_val -=
-												5;
+										Reservation_Records[count].point_val -= 5;
+										Reservation_Records[count].seat = 0; // set to front seat
+										Reservation_Records[count].vehicle = carr[i].color + " compact.";
 										match = true;
 									} else
-										cout << "ERROR! Seat not available."
-												<< endl;
+										cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 								}
 									break;
 								case 'b':
 								case 'B': {
-									if (!carr[i].seatArr[1].occupied
-											&& !match) {
+									if (!carr[i].seatArr[1].occupied && !match && (Reservation_Records[count].point_val >= 3)) {
 										carr[i].occupySeat(1);
-										Reservation_Records[count].point_val -=
-												3;
+										Reservation_Records[count].point_val -= 3;
+										Reservation_Records[count].seat = 1; // set to back-l seat
+										Reservation_Records[count].vehicle = carr[i].color + " compact.";
 										match = true;
-									} else if (!carr[i].seatArr[2].occupied
-											&& !match) {
+									} else if (!carr[i].seatArr[2].occupied && !match) {
 										carr[i].occupySeat(2);
-										Reservation_Records[count].point_val -=
-												3;
+										Reservation_Records[count].seat = 2; // set to back-r seat
+										Reservation_Records[count].vehicle = carr[i].color + " compact.";
+										Reservation_Records[count].point_val -= 3;
 										match = true;
 									} else
-										cout << "ERROR! Seat not available."
-												<< endl;
+										cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 								}
 									break;
 								}
@@ -455,49 +472,47 @@ void create_reservation() {
 							if (car_color == sarr[i].color) {
 								colorMatch = true;
 								cout << "Which seat? (F)ront, (B)ack, or (M)iddle?" << endl;
-								cin >> seat_sel; cin.ignore();
+								cin >> seat_sel;
+								cin.ignore();
 								switch (seat_sel) {
 								case 'f':
 								case 'F':
-									if (!sarr[i].seatArr[0].occupied
-											&& !match) {
+									if (!sarr[i].seatArr[0].occupied && !match && (Reservation_Records[count].point_val >= 5)) {
 										sarr[i].occupySeat(0);
-										Reservation_Records[count].point_val -=
-												5;
+										Reservation_Records[count].seat = 0;
+										Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+										Reservation_Records[count].point_val -= 5;
 										match = true;
 									} else
-										cout << "ERROR! Seat not available."
-												<< endl;
+										cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 									break;
 								case 'b':
 								case 'B':
-									if (!sarr[i].seatArr[1].occupied
-											&& !match) {
+									if (!sarr[i].seatArr[1].occupied && !match && (Reservation_Records[count].point_val >= 2)) {
 										sarr[i].occupySeat(1);
-										Reservation_Records[count].point_val -=
-												2;
+										Reservation_Records[count].seat = 1;
+										Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+										Reservation_Records[count].point_val -= 2;
 										match = true;
-									} else if (!carr[i].seatArr[2].occupied
-											&& !match) {
+									} else if (!carr[i].seatArr[2].occupied && !match && (Reservation_Records[count].point_val >= 2)) {
 										sarr[i].occupySeat(2);
-										Reservation_Records[count].point_val -=
-												2;
+										Reservation_Records[count].seat = 2;
+										Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+										Reservation_Records[count].point_val -= 2;
 										match = true;
 									} else
-										cout << "ERROR! Seat not available."
-												<< endl;
+										cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 									break;
 								case 'm':
 								case 'M':
-									if (!sarr[i].seatArr[3].occupied
-											&& !match) {
+									if (!sarr[i].seatArr[3].occupied && !match && (Reservation_Records[count].point_val >= 1)) {
 										sarr[i].occupySeat(3);
-										Reservation_Records[count].point_val -=
-												1;
+										Reservation_Records[count].seat = 3;
+										Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+										Reservation_Records[count].point_val -= 1;
 										match = true;
 									} else
-										cout << "ERROR! Seat not available."
-												<< endl;
+										cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 									break;
 								}
 							}

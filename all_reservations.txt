@@ -1,24 +1,45 @@
-Name: Pat Cooper Point val: 6 Res number: 0 No seat assigned. Car not assigned.
-Name: Jane Cox Point val: 2 Res number: 1 No seat assigned. Car not assigned.
-Name: Tim Taylor Point val: 4 Res number: 2 No seat assigned. Car not assigned.
-Name: Ben Butler Point val: 3 Res number: 3 No seat assigned. Car not assigned.
-Name: Art Campbell Point val: 4 Res number: 4 No seat assigned. Car not assigned.
-Name: Ann Edwards Point val: 7 Res number: 5 No seat assigned. Car not assigned.
-Name: Pam Allen Point val: 4 Res number: 6 No seat assigned. Car not assigned.
-Name: Tony James Point val: 4 Res number: 7 No seat assigned. Car not assigned.
-Name: Ron Jonesn Point val: 9 Res number: 8 No seat assigned. Car not assigned.
-Name: Will Rogers Point val: 1 Res number: 9 No seat assigned. Car not assigned.
-Name: Don Williams Point val: 3 Res number: 10 No seat assigned. Car not assigned.
-Name: Doug Long Point val: 2 Res number: 11 No seat assigned. Car not assigned.
-Name: Randy Carter Point val: 6 Res number: 12 No seat assigned. Car not assigned.
-Name: Adam Jenkins Point val: 8 Res number: 13 No seat assigned. Car not assigned.
-Name: Dan Scott Point val: 1 Res number: 14 No seat assigned. Car not assigned.
-Name: Ed Patterson Point val: 7 Res number: 15 No seat assigned. Car not assigned.
-Name: Sarah Ward Point val: 0 Res number: 16 No seat assigned. Car not assigned.
-Name: Jeff Howard Point val: 4 Res number: 17 No seat assigned. Car not assigned.
-Name: Amy Bryant Point val: 8 Res number: 18 No seat assigned. Car not assigned.
-Name: Carl Gray Point val: 1 Res number: 19 No seat assigned. Car not assigned.
-Name: Sam Miller Point val: 5 Res number: 20 No seat assigned. Car not assigned.
-Name: Rob Bell Point val: 2 Res number: 21 No seat assigned. Car not assigned.
-Name: Mary Baker Point val: 5 Res number: 22 No seat assigned. Car not assigned.
-Name: Peter Torres Point val: 6 Res number: 23 No seat assigned. Car not assigned.
+-- Pickup Truck Assignments -- 
+Purple pickup: 
+Front seat: Unassigned.
+
+Yellow pickup: 
+Front seat: Unassigned.
+
+Red pickup: 
+Front seat: Unassigned.
+
+-- Compact Car Assignments -- 
+Green compact:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Right back seat: Unassigned.
+
+Blue compact:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Right back seat: Unassigned.
+
+Yellow compact:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Right back seat: Unassigned.
+
+-- Sedan Assignments -- 
+Red sedan:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Middle back seat: Unassigned.
+Right back seat: Unassigned.
+
+Green sedan:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Middle back seat: Unassigned.
+Right back seat: Unassigned.
+
+Blue sedan:
+Front seat: Unassigned.
+Left back seat: Unassigned.
+Middle back seat: Unassigned.
+Right back seat: Unassigned.
+

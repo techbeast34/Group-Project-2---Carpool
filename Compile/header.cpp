@@ -155,13 +155,12 @@ void read_reservation() {
 /*
  * write_reservations()
  *
- *    input:       Array of reservations
+ *    input:       The truck, compact and sedan arrays
  *    output:      NA
  *    description: outputs the reservation information to the file
  */
 
-// TODO - edit for the vehicle descriptor
-void write_reservations() {
+void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 
 	string admin_password = "password";
 	string entered_password;
@@ -172,18 +171,71 @@ void write_reservations() {
 	if (entered_password == admin_password) {
 		ofstream outFile("all_reservations.txt");
 		if (outFile.is_open()) {
-			for (int count = 0; count < 24; count++) {
-				outFile << "Name: " << Reservation_Records[count].name
-						<< " Point val: "
-						<< Reservation_Records[count].point_val
-						<< " Res number: "
-						<< Reservation_Records[count].res_number;
-				if (Reservation_Records[count].seat == 5) {
-					outFile << " No seat assigned.";
+
+			outFile << "-- Pickup Truck Assignments -- " << endl;
+
+			for (int i = 0; i < 3; i++) {
+				outFile << truckArr[i].color << " pickup: " << endl;
+				if (truckArr[i].seatArr[0].occupied) { // seat occupied
+					outFile << "Front seat: "; // TODO
 				} else {
-					outFile << Reservation_Records[count].seat;
+					outFile << "Front seat: Unassigned." << endl;
 				}
-				outFile << Reservation_Records[count].vehicle << endl;
+				outFile << endl;
+			}
+
+			outFile << "-- Compact Car Assignments -- " << endl;
+
+			for (int i = 0; i < 3; i++) {
+				outFile << compArr[i].color << " compact:" << endl;
+				if (compArr[i].seatArr[0].occupied) {
+					outFile << "Front seat: "; // TODO
+				} else {
+					outFile << "Front seat: Unassigned." << endl;
+				}
+
+				if (compArr[i].seatArr[1].occupied) {
+					outFile << "Left back seat: "; // TODO
+				} else {
+					outFile << "Left back seat: Unassigned." << endl;
+				}
+
+				if (compArr[i].seatArr[2].occupied) {
+					outFile << "Right back seat: "; // TODO
+				} else {
+					outFile << "Right back seat: Unassigned." << endl;
+				}
+				outFile << endl;
+			}
+
+			outFile << "-- Sedan Assignments -- " << endl;
+
+			for (int i = 0; i < 3; i++) {
+				outFile << sedArr[i].color << " sedan:" << endl;
+				if (sedArr[i].seatArr[0].occupied) {
+					outFile << "Front seat: "; // TODO
+				} else {
+					outFile << "Front seat: Unassigned." << endl;
+				}
+
+				if (sedArr[i].seatArr[1].occupied) {
+					outFile << "Left back seat: "; // TODO
+				} else {
+					outFile << "Left back seat: Unassigned." << endl;
+				}
+
+				if (sedArr[i].seatArr[3].occupied) {
+					outFile << "Middle back seat: "; // TODO
+				} else {
+					outFile << "Middle back seat: Unassigned." << endl;
+				}
+
+				if (sedArr[i].seatArr[2].occupied) {
+					outFile << "Right back seat: "; // TODO
+				} else {
+					outFile << "Right back seat: Unassigned." << endl;
+				}
+				outFile << endl;
 			}
 
 		} else {
@@ -458,7 +510,7 @@ void create_reservation() {
 			return;
 		}
 	}
-	// for loop to go through database
+// for loop to go through database
 
 	return;
 }
@@ -499,30 +551,32 @@ void modify_reservation() {
 					Reservation_Records[count].point_val =
 							Reservation_Records[count].point_val + 5;
 				} else if (Reservation_Records[count].vehicle == "Compact") {
-					if ((Reservation_Records[count].seat == 1) || (Reservation_Records[count].seat == 2))
-						Reservation_Records[count].point_val = Reservation_Records[count].point_val + 3;
-				} else if  (Reservation_Records[count].vehicle == "Sedan") {
-					if ((Reservation_Records[count].seat == 1) || (Reservation_Records[count].seat == 2))
-						Reservation_Records[count].point_val = Reservation_Records[count].point_val + 2;
+					if ((Reservation_Records[count].seat == 1)
+							|| (Reservation_Records[count].seat == 2))
+						Reservation_Records[count].point_val =
+								Reservation_Records[count].point_val + 3;
+				} else if (Reservation_Records[count].vehicle == "Sedan") {
+					if ((Reservation_Records[count].seat == 1)
+							|| (Reservation_Records[count].seat == 2))
+						Reservation_Records[count].point_val =
+								Reservation_Records[count].point_val + 2;
 					else
-						Reservation_Records[count].point_val = Reservation_Records[count].point_val + 1;
+						Reservation_Records[count].point_val =
+								Reservation_Records[count].point_val + 1;
 				}
-					cout << "Enter seat number wanted: ";
-					cin >> seat_number;
-
+				cout << "Enter seat number wanted: ";
+				cin >> seat_number;
 
 // TODO -- Seat empty or not
 
-					cout
-							<< "Seat unavailable. Already taken. Choose another seat."
-							<< endl;
+				cout << "Seat unavailable. Already taken. Choose another seat."
+						<< endl;
 
-				}
 			}
-		else {
+		} else {
 			cout
-			<< "ERROR: Check reservation number. Number does not exist in database."
-			<< endl;
+					<< "ERROR: Check reservation number. Number does not exist in database."
+					<< endl;
 		}
 	}
 }
@@ -536,25 +590,44 @@ void modify_reservation() {
  */
 
 void delete_reservation() {
-int delete_res;
-int old_seat;
+	int delete_res;
+	int old_seat;
 
-cout << "Enter reservation to be deleted: ";
-cin >> delete_res;
+	cout << "Enter reservation to be deleted: ";
+	cin >> delete_res;
 
-if (delete_res == 23) { // its the last value in the array
-	return;
-}
+	if (delete_res == 23) { // its the last value in the array
+		return;
+	}
 
-for (int count = 0; count < 24; count++) {
-	if (Reservation_Records[count].res_number == delete_res) {
-		old_seat = Reservation_Records[count].seat;
-		Reservation_Records[count].seat = 5; // unassigned
-		Reservation_Records[count].vehicle = " Car not assigned.";
+	for (int count = 0; count < 24; count++) {
+		if (Reservation_Records[count].res_number == delete_res) {
+			old_seat = Reservation_Records[count].seat;
+			Reservation_Records[count].seat = 5; // unassigned
+			Reservation_Records[count].vehicle = " Car not assigned.";
 
 // TODO - This should work unless the object in the array has to literally be deleted
-	} else {
-		cout << "ERROR: Reservation does not exist." << endl;
+		} else {
+			cout << "ERROR: Reservation does not exist." << endl;
+		}
 	}
 }
+
+/*
+ * update_points()
+ *
+ *    input:       NA
+ *    output:      NA
+ *    description: updates the point values in seat_credits.txt
+ */
+void update_points() {
+
+	ofstream outFile("seat_credits2.txt"); // TODO -- change this to seat_credits.txt at the end
+	if (outFile.is_open()) {
+		for (int res = 0; res < 24; res++) {
+			outFile << Reservation_Records[res].name << " " << Reservation_Records[res].point_val << endl;
+		}
+	} else {
+		cout << "Unable to open output file." << endl;
+	}
 }

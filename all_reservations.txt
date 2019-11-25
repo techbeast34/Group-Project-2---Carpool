@@ -1,7 +1,6 @@
 -- Pickup Truck Assignments -- 
 Purple pickup: 
-Front seat: Unassigned.
-
+Front seat: 
 Yellow pickup: 
 Front seat: Unassigned.
 

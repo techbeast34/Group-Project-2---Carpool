@@ -104,5 +104,8 @@ void write_reservations(pickup parr[], compact carr[], sedan sarr[]);
 void read_reservation();
 void create_reservation();
 void update_points();
+void write_res_file();
+
+void test_display();
 
 #endif /* COMPILE_HEADER_H_ */

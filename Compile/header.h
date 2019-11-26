@@ -33,6 +33,7 @@ public:
 	void occupySeat(int num);
 	void freeSeat(int num);
 	friend void create_reservation();
+	friend void modify_reservation();
 };
 
 // class of pickup, inherits from vehicle
@@ -107,5 +108,6 @@ void update_points();
 void write_res_file();
 
 void test_display();
+void test_print();
 
 #endif /* COMPILE_HEADER_H_ */

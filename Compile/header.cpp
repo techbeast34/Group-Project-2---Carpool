@@ -306,17 +306,20 @@ void create_reservation() {
 					case 'F': {
 						if (Reservation_Records[count].point_val >= 5) {
 							for (int i = 0; (i < 3) && !match; i++) {
-								if (!parr[i].seatArr[0].occupied && !match) {
+								if (!parr[i].seatArr[0].occupied && !match) { // assign to pickup
 									parr[i].occupySeat(0);
-									Reservation_Records[count].vehicle = parr[i].color + " pickup.";
+									Reservation_Records[count].vehicle_color = parr[i].color;
+									Reservation_Records[count].vehicle_type = "Pickup";
 									match = true;
 								} else if (!carr[i].seatArr[0].occupied && !match) {
 									carr[i].occupySeat(0);
-									Reservation_Records[count].vehicle = carr[i].color + " compact.";
+									Reservation_Records[count].vehicle_color = carr[i].color;
+									Reservation_Records[count].vehicle_type = "Compact";
 									match = true;
 								} else if (!sarr[i].seatArr[0].occupied && !match) {
 									sarr[i].occupySeat(0);
-									Reservation_Records[count].vehicle = sarr[i].color + " sedan.";
+									Reservation_Records[count].vehicle_color = sarr[i].color;
+									Reservation_Records[count].vehicle_type = "Sedan";
 									match = true;
 								}
 							}
@@ -574,7 +577,7 @@ void modify_reservation() {
 	cin >> res_number;
 
 	for (int count = 0; count < 24; count++) {
-		if (res_number == Reservation_Records[count].res_number) { // if its a match
+		if (res_number == Reservation_Records[count].res_number) { // its a match
 
 
 			// TODO -- get car already in and give back points and unassign

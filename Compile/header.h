@@ -54,7 +54,8 @@ struct reservation {
 	int res_number; // reservation number as an int
 	int point_val;  // point value
 	string name;    // the name of the person
-	string vehicle;    // the vehicle string
+	string vehicle_type;    // the vehicle type
+	string vehicle_color; // the vehicle color
 	int seat;       // the seat number
 };
 

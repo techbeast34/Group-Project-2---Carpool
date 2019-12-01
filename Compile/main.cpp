@@ -17,11 +17,13 @@ int main() {
 
 	read_reservation();
 	create_reservation();
-	//write_res_file();
 
 	//update_points(); // updates the seat_credits.txt file to reflect point changes -- make sure this is changed in function to the real txt file
 
 	test_print();
+	write_res_file();
+	modify_reservation();
+
 
 	return 0;
 }

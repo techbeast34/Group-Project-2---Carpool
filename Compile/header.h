@@ -107,6 +107,7 @@ void read_reservation();
 void create_reservation();
 void update_points();
 void write_res_file();
+void modify_reservation();
 
 void test_display();
 void test_print();

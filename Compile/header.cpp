@@ -178,6 +178,7 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 
 			outFile << "-- Pickup Truck Assignments -- " << endl;
 
+
 			for (int i = 0; i < 3; i++) {
 				outFile << truckArr[i].color << " pickup: " << endl;
 				if (truckArr[i].seatArr[0].occupied) { // seat occupied
@@ -189,10 +190,9 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Front seat: Unassigned." << endl;
-				}
-				outFile << endl;
-			}
-
+                }
+            }
+            cout << endl;
 			outFile << "-- Compact Car Assignments -- " << endl;
 
 			for (int i = 0; i < 3; i++) {
@@ -208,6 +208,7 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					outFile << "Front seat: Unassigned." << endl;
 				}
 
+            
 				if (compArr[i].seatArr[1].occupied) {
 					outFile << "Left back seat: ";
 					for(int c = 0; c < 24; c++){
@@ -217,8 +218,9 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Left back seat: Unassigned." << endl;
-				}
-
+                }
+			outFile << endl;
+            
 				if (compArr[i].seatArr[2].occupied) {
 					outFile << "Right back seat: ";
 					for(int c = 0; c < 24; c++){
@@ -228,10 +230,9 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Right back seat: Unassigned." << endl;
-				}
-				outFile << endl;
-			}
-
+                }
+			outFile << endl;
+            }
 			outFile << "-- Sedan Assignments -- " << endl;
 
 			for (int i = 0; i < 3; i++) {
@@ -245,8 +246,8 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Front seat: Unassigned." << endl;
-				}
-
+                }
+    
 				if (sedArr[i].seatArr[1].occupied) {
 					outFile << "Left back seat: ";
 					for(int c = 0; c < 24; c++){
@@ -256,7 +257,7 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Left back seat: Unassigned." << endl;
-				}
+                }
 
 				if (sedArr[i].seatArr[3].occupied) {
 					outFile << "Middle back seat: ";
@@ -267,7 +268,7 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Middle back seat: Unassigned." << endl;
-				}
+                }
 
 				if (sedArr[i].seatArr[2].occupied) {
 					outFile << "Right back seat: ";
@@ -278,16 +279,20 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 					}
 				} else {
 					outFile << "Right back seat: Unassigned." << endl;
-				}
-				outFile << endl;
-			}
+                }
+			outFile << endl;
 
-		} else {
-			cout << "Unable to open output file." << endl;
+		} 
 		}
+        else {
+			cout << "Unable to open output file." << endl;
+        }
 	} else {
 		cout << "Entered password was incorrect. Returning to menu.";
 		return;
+
+// TODO - return to menu here
+
 	}
 }
 
@@ -306,12 +311,12 @@ void write_res_file() {
 
 void create_reservation() {
 	string passenger_first; // user entered person's name
-	string passenger_last;  // user entered last name
-	string passenger_name;  // full name
-	char menu_sel;          //menu select
-	char submenu_sel;       // sub menu select
-	char seat_sel;          // seat selection
-	string car_color;       // car color
+	string passenger_last; // user entered last name
+	string passenger_name; // full name
+	char menu_sel; //menu select
+	char submenu_sel; // sub menu select
+	char seat_sel; // seat selection
+	string car_color; // car color
 	bool nameMatch = false;
 
 	cout << "Enter passenger's name to create the reservation: ";
@@ -617,7 +622,7 @@ void create_reservation() {
 void modify_reservation() {
 	int number; // user entered reservation number
 	string car;
-	//int seat_number, current_seat;
+//int seat_number, current_seat;
 	char car_type;
 	bool colorMatch = false;
 	bool match = false;

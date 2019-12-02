@@ -1,6 +1,6 @@
 -- Pickup Truck Assignments -- 
 Purple pickup: 
-Front seat: Pat Cooper
+Front seat: Unassigned.
 
 Yellow pickup: 
 Front seat: Unassigned.
@@ -28,7 +28,7 @@ Right back seat: Unassigned.
 Red sedan:
 Front seat: Unassigned.
 Left back seat: Unassigned.
-Middle back seat: Unassigned.
+Middle back seat: Jane Cox
 Right back seat: Unassigned.
 
 Green sedan:

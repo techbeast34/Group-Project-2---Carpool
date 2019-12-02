@@ -26,6 +26,169 @@ compact carr[3] = { c1, c2, c3 };
 sedan sarr[3] = { s1, s2, s3 };
 vehicle v;
 
+void vehicle::print_vehicle_assign(pickup truckArr[], compact compArr[], sedan sedArr[]){
+	int menuSel = 0;
+	int idx	= 0;
+	string filename;
+
+	cout << "Which vehicle assignments would you like to print?" << endl;
+
+	cout << "(1) Purple Pickup" << endl;
+	cout << "(2) Yellow Pickup" << endl;
+	cout << "(3) Red Pickup" << endl;
+
+	cout << "(4) Green Compact" << endl;
+	cout << "(5) Blue Compact" << endl;
+	cout << "(6) Yellow Compact" << endl;
+
+	cout << "(7) Red Sedan" << endl;
+	cout << "(8) Green Sedan" << endl;
+	cout << "(9) Blue Sedan" << endl;
+	cin >> menuSel; cin.ignore();
+
+	if(menuSel >= 1 && menuSel <= 3){
+		idx = menuSel - 1;
+		cout << "Assignments for " << truckArr[idx].color << " Pickup:" << endl;
+
+		filename = truckArr[idx].color + "_pickup.txt";
+		ofstream outFile(filename.c_str());
+
+		if (truckArr[idx].seatArr[0].occupied) { // seat occupied
+			outFile << "Front seat: ";
+			cout << "Front seat: ";
+			for (int c = 0; c < 24; c++) {
+				if (Reservation_Records[c].vehicle_color == truckArr[idx].color && Reservation_Records[c].vehicle_type == "Pickup"
+						&& Reservation_Records[c].seat == 0) {
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Front seat: Unassigned." << endl;
+			cout << "Front seat: Unassigned" << endl;
+		}
+	} else if(menuSel >= 4 && menuSel <= 6){
+		idx = menuSel - 4;
+		cout << "Assignments for " << compArr[idx].color << " Compact:" << endl;
+
+		filename = compArr[idx].color + "_compact.txt";
+		ofstream outFile(filename.c_str());
+
+		outFile << compArr[idx].color << " compact:" << endl;
+		if (compArr[idx].seatArr[0].occupied) {
+			outFile << "Front seat: ";
+			cout << "Front seat: ";
+			for(int c = 0; c < 24; c++){
+				if(Reservation_Records[c].vehicle_color == compArr[idx].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 0){
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Front seat: Unassigned." << endl;
+			cout << "Front seat: Unassigned." << endl;
+		}
+
+		if (compArr[idx].seatArr[1].occupied) {
+			outFile << "Left back seat: ";
+			cout << "Left back seat: ";
+			for(int c = 0; c < 24; c++){
+				if(Reservation_Records[c].vehicle_color == compArr[idx].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 1){
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Left back seat: Unassigned." << endl;
+			cout << "Left back seat: Unassigned." << endl;
+        }
+
+		if (compArr[idx].seatArr[2].occupied) {
+			outFile << "Right back seat: ";
+			cout << "Right back seat: ";
+			for(int c = 0; c < 24; c++){
+				if(Reservation_Records[c].vehicle_color == compArr[idx].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 2){
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Right back seat: Unassigned." << endl;
+			cout << "Right back seat: Unassigned." << endl;
+        }
+	} else if(menuSel >= 7 && menuSel <= 9){
+		idx = menuSel - 7;
+		cout << "Assignments for " << sedArr[idx].color << " Sedan:" << endl;
+
+		filename = sedArr[idx].color + "_compact.txt";
+		ofstream outFile(filename.c_str());
+
+		outFile << sedArr[idx].color << " sedan:" << endl;
+		if (sedArr[idx].seatArr[0].occupied) {
+			outFile << "Front seat: ";
+			cout << "Front seat: ";
+			for (int c = 0; c < 24; c++) {
+				if (Reservation_Records[c].vehicle_color == sedArr[idx].color && Reservation_Records[c].vehicle_type == "Sedan"
+						&& Reservation_Records[c].seat == 0) {
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Front seat: Unassigned." << endl;
+			cout << "Front seat: Unassigned." << endl;
+		}
+
+		if (sedArr[idx].seatArr[1].occupied) {
+			outFile << "Left back seat: ";
+			cout << "Left back seat: ";
+			for (int c = 0; c < 24; c++) {
+				if (Reservation_Records[c].vehicle_color == sedArr[idx].color && Reservation_Records[c].vehicle_type == "Sedan"
+						&& Reservation_Records[c].seat == 1) {
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Left back seat: Unassigned." << endl;
+			cout << "Left back seat: Unassigned." << endl;
+		}
+
+		if (sedArr[idx].seatArr[3].occupied) {
+			outFile << "Middle back seat: ";
+			cout << "Middle back seat: ";
+			for (int c = 0; c < 24; c++) {
+				if (Reservation_Records[c].vehicle_color == sedArr[idx].color && Reservation_Records[c].vehicle_type == "Sedan"
+						&& Reservation_Records[c].seat == 3) {
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Middle back seat: Unassigned." << endl;
+			cout << "Middle back seat: Unassigned." << endl;
+		}
+
+		if (sedArr[idx].seatArr[2].occupied) {
+			outFile << "Right back seat: ";
+			cout << "Right back seat: ";
+			for (int c = 0; c < 24; c++) {
+				if (Reservation_Records[c].vehicle_color == sedArr[idx].color && Reservation_Records[c].vehicle_type == "Sedan"
+						&& Reservation_Records[c].seat == 2) {
+					outFile << Reservation_Records[c].name << endl;
+					cout << Reservation_Records[c].name << endl;
+				}
+			}
+		} else {
+			outFile << "Right back seat: Unassigned." << endl;
+			cout << "Right back seat: Unassigned." << endl;
+		}
+
+
+	}
+
+}
+
 /*
  * vehicle::occupySeat()
  *
@@ -163,7 +326,6 @@ void read_reservation() {
  *    output:      NA
  *    description: outputs the reservation information to the file
  */
-
 void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 
 	string admin_password = "password";
@@ -299,6 +461,9 @@ void write_res_file() {
 	v.write_reservations(parr, carr, sarr);
 }
 
+void print_veh_file(){
+	v.print_vehicle_assign(parr, carr, sarr);
+}
 /*
  * create_reservation()
  *

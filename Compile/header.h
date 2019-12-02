@@ -30,6 +30,8 @@ protected:
 public:
 	void display(pickup parr[], compact carr[], sedan sarr[]);
 	void write_reservations(pickup parr[], compact carr[], sedan sarr[]);
+	void print_vehicle_assign(pickup parr[], compact carr[], sedan sarr[]);
+
 	void occupySeat(int num);
 	void freeSeat(int num);
 	friend void create_reservation();
@@ -101,12 +103,11 @@ public:
 	}
 };
 
-void display(pickup parr[], compact carr[], sedan sarr[]);
-void write_reservations(pickup parr[], compact carr[], sedan sarr[]);
 void read_reservation();
 void create_reservation();
 void update_points();
 void write_res_file();
+void print_veh_file();
 void modify_reservation();
 
 void test_display();

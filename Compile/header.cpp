@@ -189,6 +189,7 @@ void vehicle::print_vehicle_assign(pickup truckArr[], compact compArr[], sedan s
 
 }
 
+
 /*
  * vehicle::occupySeat()
  *

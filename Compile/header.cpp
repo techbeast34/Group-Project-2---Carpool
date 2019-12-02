@@ -1061,9 +1061,7 @@ void delete_reservation() {
 	for (int count = 0; count < 24; count++) {
 		if (Reservation_Records[count].res_number == delete_res) {
 			resfound = true;
-			Reservation_Records[count].seat = 5; // unassigned
-			Reservation_Records[count].vehicle_color = " Car not assigned.";
-			Reservation_Records[count].vehicle_type = " Car not assigned.";
+
 
 			if (Reservation_Records[count].seat == 0) {
 				Reservation_Records[count].point_val = Reservation_Records[count].point_val + 5;
@@ -1153,11 +1151,14 @@ void delete_reservation() {
 				}
 
 			}
-		}
-		if (!resfound) {
-			cout << "ERROR: Reservation does not exist." << endl;
-		}
 
+			Reservation_Records[count].seat = 5; // unassigned
+			Reservation_Records[count].vehicle_color = " Car not assigned.";
+			Reservation_Records[count].vehicle_type = " Car not assigned.";
+		}
+	}
+	if (!resfound) {
+		cout << "ERROR: Reservation does not exist." << endl;
 	}
 }
 /*

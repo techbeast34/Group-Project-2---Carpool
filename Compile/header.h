@@ -36,6 +36,7 @@ public:
 	void freeSeat(int num);
 	friend void create_reservation();
 	friend void modify_reservation();
+	friend void delete_reservation();
 };
 
 // class of pickup, inherits from vehicle

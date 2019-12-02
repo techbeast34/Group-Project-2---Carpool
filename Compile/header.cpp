@@ -275,7 +275,7 @@ void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 	}
 }
 
-void dispaly_all() {
+void display_all() {
 	v.display(parr, carr, sarr);
 }
 
@@ -913,9 +913,9 @@ void modify_reservation() {
 							cout << "ERROR! Seat not available, or you don't have enough points." << endl;
 						return;
 					}
-					if (!colorMatch) {
-						cout << "ERROR! Car not found." << endl;
-					}
+				}
+				if (!colorMatch) {
+					cout << "ERROR! Car not found." << endl;
 				}
 				break;
 			case 'c':
@@ -1047,6 +1047,7 @@ void modify_reservation() {
 
 void delete_reservation() {
 	int delete_res;
+	bool resfound = false;
 
 	cout << "Enter reservation to be deleted: ";
 	cin >> delete_res;
@@ -1058,16 +1059,105 @@ void delete_reservation() {
 
 	for (int count = 0; count < 24; count++) {
 		if (Reservation_Records[count].res_number == delete_res) {
+			resfound = true;
 			Reservation_Records[count].seat = 5; // unassigned
 			Reservation_Records[count].vehicle_color = " Car not assigned.";
 			Reservation_Records[count].vehicle_type = " Car not assigned.";
 
-// TODO - This should work unless the object in the array has to literally be deleted
-		} else {
+			if (Reservation_Records[count].seat == 0) {
+				Reservation_Records[count].point_val = Reservation_Records[count].point_val + 5;
+
+				if (Reservation_Records[count].vehicle_type == "Pickup") { // pickup front seats
+					if (Reservation_Records[count].vehicle_color == "Purple") {
+						parr[0].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Yellow") {
+						parr[1].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Red") {
+						parr[2].seatArr[0].occupied = false;
+					}
+				} else if (Reservation_Records[count].vehicle_type == "Compact") { // compact car front seats
+					if (Reservation_Records[count].vehicle_color == "Green") {
+						carr[0].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Blue") {
+						carr[1].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Yellow") {
+						carr[2].seatArr[0].occupied = false;
+					}
+				} else if (Reservation_Records[count].vehicle_type == "Sedan") { // secan front seats
+					if (Reservation_Records[count].vehicle_color == "Red") {
+						sarr[0].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Green") {
+						sarr[1].seatArr[0].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Blue") {
+						sarr[2].seatArr[0].occupied = false;
+					}
+				}
+
+			} else if (Reservation_Records[count].seat == 1) {
+				if (Reservation_Records[count].vehicle_type == "Compact") {
+					Reservation_Records[count].point_val = Reservation_Records[count].point_val + 3;
+
+					if (Reservation_Records[count].vehicle_type == "Compact") { // compact car front seats
+						if (Reservation_Records[count].vehicle_color == "Green") {
+							carr[0].seatArr[1].occupied = false;
+						} else if (Reservation_Records[count].vehicle_color == "Blue") {
+							carr[1].seatArr[1].occupied = false;
+						} else if (Reservation_Records[count].vehicle_color == "Yellow") {
+							carr[2].seatArr[1].occupied = false;
+						}
+					} else {
+						Reservation_Records[count].point_val = Reservation_Records[count].point_val + 2;
+						if (Reservation_Records[count].vehicle_color == "Red") {
+							sarr[0].seatArr[1].occupied = false;
+						} else if (Reservation_Records[count].vehicle_color == "Green") {
+							sarr[1].seatArr[1].occupied = false;
+						} else if (Reservation_Records[count].vehicle_color == "Blue") {
+							sarr[2].seatArr[1].occupied = false;
+						}
+
+					}
+				}
+			} else if (Reservation_Records[count].seat == 2) {
+				if (Reservation_Records[count].vehicle_type == "Compact") {
+					Reservation_Records[count].point_val = Reservation_Records[count].point_val + 3;
+
+					if (Reservation_Records[count].vehicle_color == "Green") {
+						carr[0].seatArr[2].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Blue") {
+						carr[1].seatArr[2].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Yellow") {
+						carr[2].seatArr[2].occupied = false;
+					}
+				}
+
+				else if (Reservation_Records[count].vehicle_type == "Sedan") {
+					Reservation_Records[count].point_val = Reservation_Records[count].point_val + 2;
+					if (Reservation_Records[count].vehicle_color == "Red") {
+						sarr[0].seatArr[2].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Green") {
+						sarr[1].seatArr[2].occupied = false;
+					} else if (Reservation_Records[count].vehicle_color == "Blue") {
+						sarr[2].seatArr[2].occupied = false;
+					}
+
+				}
+			} else if (Reservation_Records[count].seat == 3) {
+				Reservation_Records[count].point_val = Reservation_Records[count].point_val + 1;
+				if (Reservation_Records[count].vehicle_color == "Red") {
+					sarr[0].seatArr[3].occupied = false;
+				} else if (Reservation_Records[count].vehicle_color == "Green") {
+					sarr[1].seatArr[3].occupied = false;
+				} else if (Reservation_Records[count].vehicle_color == "Blue") {
+					sarr[2].seatArr[3].occupied = false;
+				}
+
+			}
+		}
+		if (!resfound) {
 			cout << "ERROR: Reservation does not exist." << endl;
 		}
-	}
 
+	}
 }
 /*
  * update_points()

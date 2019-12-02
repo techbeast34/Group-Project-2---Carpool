@@ -178,69 +178,399 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 
 			outFile << "-- Pickup Truck Assignments -- " << endl;
 
-			for (int i = 0; i < 3; i++) {
-				outFile << truckArr[i].color << " pickup: " << endl;
-				if (truckArr[i].seatArr[0].occupied) { // seat occupied
-					outFile << "Front seat: "; // TODO
-				} else {
-					outFile << "Front seat: Unassigned." << endl;
+			// Purple truck
+			outFile << truckArr[0].color << " pickup: " << endl;
+			if (truckArr[0].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].vehicle_type == "Pickup") {
+						if (Reservation_Records[count].vehicle_color == "Purple") {
+							outFile << Reservation_Records[count].name << endl;
+						}
+					}
 				}
-				outFile << endl;
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
 			}
+			outFile << endl;
+
+			// Yellow truck
+			outFile << truckArr[1].color << " pickup: " << endl;
+			if (truckArr[1].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].vehicle_type == "Pickup") {
+						if (Reservation_Records[count].vehicle_color == "Yellow") {
+							outFile << Reservation_Records[count].name << endl;
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			// Red Truck
+			outFile << truckArr[2].color << " pickup: " << endl;
+			if (truckArr[2].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].vehicle_type == "Pickup") {
+						if (Reservation_Records[count].vehicle_color == "Red") {
+							outFile << Reservation_Records[count].name << endl;
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+			outFile << endl;
 
 			outFile << "-- Compact Car Assignments -- " << endl;
 
-			for (int i = 0; i < 3; i++) {
-				outFile << compArr[i].color << " compact:" << endl;
-				if (compArr[i].seatArr[0].occupied) {
-					outFile << "Front seat: "; // TODO
-				} else {
-					outFile << "Front seat: Unassigned." << endl;
-				}
+			// Green compact
 
-				if (compArr[i].seatArr[1].occupied) {
-					outFile << "Left back seat: "; // TODO
-				} else {
-					outFile << "Left back seat: Unassigned." << endl;
+			outFile << compArr[0].color << " compact:" << endl;
+			if (compArr[0].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
 				}
-
-				if (compArr[i].seatArr[2].occupied) {
-					outFile << "Right back seat: "; // TODO
-				} else {
-					outFile << "Right back seat: Unassigned." << endl;
-				}
-				outFile << endl;
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
 			}
+			outFile << endl;
+
+			if (compArr[0].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (compArr[0].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			// Blue compact car
+
+			outFile << compArr[1].color << " compact:" << endl;
+			if (compArr[1].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			if (compArr[1].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (compArr[1].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			// Yellow compact car
+
+			outFile << compArr[2].color << " compact:" << endl;
+			if (compArr[2].seatArr[0].occupied) { // seat occupied
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Yellow") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			if (compArr[2].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Yellow") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (compArr[2].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Compact") {
+							if (Reservation_Records[count].vehicle_color == "Yellow") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
 
 			outFile << "-- Sedan Assignments -- " << endl;
 
-			for (int i = 0; i < 3; i++) {
-				outFile << sedArr[i].color << " sedan:" << endl;
-				if (sedArr[i].seatArr[0].occupied) {
-					outFile << "Front seat: "; // TODO
-				} else {
-					outFile << "Front seat: Unassigned." << endl;
-				}
+			// Red sedan
 
-				if (sedArr[i].seatArr[1].occupied) {
-					outFile << "Left back seat: "; // TODO
-				} else {
-					outFile << "Left back seat: Unassigned." << endl;
+			outFile << sedArr[0].color << " sedan:" << endl;
+			if (sedArr[0].seatArr[0].occupied) {
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Red") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
 				}
-
-				if (sedArr[i].seatArr[3].occupied) {
-					outFile << "Middle back seat: "; // TODO
-				} else {
-					outFile << "Middle back seat: Unassigned." << endl;
-				}
-
-				if (sedArr[i].seatArr[2].occupied) {
-					outFile << "Right back seat: "; // TODO
-				} else {
-					outFile << "Right back seat: Unassigned." << endl;
-				}
-				outFile << endl;
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
 			}
+
+			if (sedArr[0].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Red") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[0].seatArr[3].occupied) {
+				outFile << "Middle back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Red") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Middle back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[0].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Red") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			// Green sedan
+
+			outFile << sedArr[1].color << " sedan:" << endl;
+			if (sedArr[1].seatArr[0].occupied) {
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+
+			if (sedArr[1].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[1].seatArr[3].occupied) {
+				outFile << "Middle back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Middle back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[1].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Green") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
+
+			// Blue sedan
+
+			outFile << sedArr[2].color << " sedan:" << endl;
+			if (sedArr[2].seatArr[0].occupied) {
+				outFile << "Front seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 0) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Front seat: Unassigned." << endl;
+			}
+
+			if (sedArr[2].seatArr[1].occupied) {
+				outFile << "Left back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Left back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[2].seatArr[3].occupied) {
+				outFile << "Middle back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 2) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Middle back seat: Unassigned." << endl;
+			}
+
+			if (sedArr[2].seatArr[2].occupied) {
+				outFile << "Right back seat: ";
+				for (int count = 0; count < 24; count++) {
+					if (Reservation_Records[count].seat == 1) {
+						if (Reservation_Records[count].vehicle_type == "Sedan") {
+							if (Reservation_Records[count].vehicle_color == "Blue") {
+								outFile << Reservation_Records[count].name << endl;
+							}
+						}
+					}
+				}
+			} else {
+				outFile << "Right back seat: Unassigned." << endl;
+			}
+			outFile << endl;
 
 		} else {
 			cout << "Unable to open output file." << endl;
@@ -248,7 +578,7 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 	} else {
 		cout << "Entered password was incorrect. Returning to menu.";
 		return;
-		// TODO - return to menu here
+// TODO - return to menu here
 	}
 }
 
@@ -267,12 +597,12 @@ void write_res_file() {
 
 void create_reservation() {
 	string passenger_first; // user entered person's name
-	string passenger_last;  // user entered last name
-	string passenger_name;  // full name
-	char menu_sel;          //menu select
-	char submenu_sel;       // sub menu select
-	char seat_sel;          // seat selection
-	string car_color;       // car color
+	string passenger_last; // user entered last name
+	string passenger_name; // full name
+	char menu_sel; //menu select
+	char submenu_sel; // sub menu select
+	char seat_sel; // seat selection
+	string car_color; // car color
 	bool nameMatch = false;
 
 	cout << "Enter passenger's name to create the reservation: ";
@@ -579,7 +909,7 @@ void create_reservation() {
 void modify_reservation() {
 	int number; // user entered reservation number
 	string car;
-	//int seat_number, current_seat;
+//int seat_number, current_seat;
 	char car_type;
 	bool colorMatch = false;
 	bool match = false;

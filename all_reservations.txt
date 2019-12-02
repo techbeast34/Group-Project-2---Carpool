@@ -1,6 +1,6 @@
 -- Pickup Truck Assignments -- 
 Purple pickup: 
-Front seat: Unassigned.
+Front seat: Pat Cooper
 
 Yellow pickup: 
 Front seat: Unassigned.

@@ -181,7 +181,12 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 			for (int i = 0; i < 3; i++) {
 				outFile << truckArr[i].color << " pickup: " << endl;
 				if (truckArr[i].seatArr[0].occupied) { // seat occupied
-					outFile << "Front seat: "; // TODO
+					outFile << "Front seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == truckArr[i].color && Reservation_Records[c].vehicle_type == "Pickup" && Reservation_Records[c].seat == 0){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Front seat: Unassigned." << endl;
 				}
@@ -193,19 +198,34 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 			for (int i = 0; i < 3; i++) {
 				outFile << compArr[i].color << " compact:" << endl;
 				if (compArr[i].seatArr[0].occupied) {
-					outFile << "Front seat: "; // TODO
+					outFile << "Front seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == compArr[i].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 0){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Front seat: Unassigned." << endl;
 				}
 
 				if (compArr[i].seatArr[1].occupied) {
-					outFile << "Left back seat: "; // TODO
+					outFile << "Left back seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == compArr[i].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 1){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Left back seat: Unassigned." << endl;
 				}
 
 				if (compArr[i].seatArr[2].occupied) {
-					outFile << "Right back seat: "; // TODO
+					outFile << "Right back seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == compArr[i].color && Reservation_Records[c].vehicle_type == "Compact"  && Reservation_Records[c].seat == 2){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Right back seat: Unassigned." << endl;
 				}
@@ -217,25 +237,45 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 			for (int i = 0; i < 3; i++) {
 				outFile << sedArr[i].color << " sedan:" << endl;
 				if (sedArr[i].seatArr[0].occupied) {
-					outFile << "Front seat: "; // TODO
+					outFile << "Front seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == sedArr[i].color && Reservation_Records[c].vehicle_type == "Sedan"  && Reservation_Records[c].seat == 0){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Front seat: Unassigned." << endl;
 				}
 
 				if (sedArr[i].seatArr[1].occupied) {
-					outFile << "Left back seat: "; // TODO
+					outFile << "Left back seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == sedArr[i].color && Reservation_Records[c].vehicle_type == "Sedan"  && Reservation_Records[c].seat == 1){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Left back seat: Unassigned." << endl;
 				}
 
 				if (sedArr[i].seatArr[3].occupied) {
-					outFile << "Middle back seat: "; // TODO
+					outFile << "Middle back seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == sedArr[i].color && Reservation_Records[c].vehicle_type == "Sedan"  && Reservation_Records[c].seat == 3){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Middle back seat: Unassigned." << endl;
 				}
 
 				if (sedArr[i].seatArr[2].occupied) {
-					outFile << "Right back seat: "; // TODO
+					outFile << "Right back seat: ";
+					for(int c = 0; c < 24; c++){
+						if(Reservation_Records[c].vehicle_color == sedArr[i].color && Reservation_Records[c].vehicle_type == "Sedan"  && Reservation_Records[c].seat == 2){
+							outFile << Reservation_Records[c].name << endl;
+						}
+					}
 				} else {
 					outFile << "Right back seat: Unassigned." << endl;
 				}
@@ -248,7 +288,6 @@ void vehicle::write_reservations(pickup truckArr[], compact compArr[], sedan sed
 	} else {
 		cout << "Entered password was incorrect. Returning to menu.";
 		return;
-		// TODO - return to menu here
 	}
 }
 
@@ -281,8 +320,7 @@ void create_reservation() {
 
 	for (int count = 0; count < 24; count++) {
 		if (passenger_name == Reservation_Records[count].name) {
-			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points."
-					<< endl;
+			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points." << endl;
 			nameMatch = true;
 
 			if (Reservation_Records[count].point_val == 0) {
@@ -336,16 +374,16 @@ void create_reservation() {
 						break;
 					case 'b':
 					case 'B': {
-						if (Reservation_Records[count].point_val >= 3) {
+						if (Reservation_Records[count].point_val >= 2) {
 							for (int i = 0; (i < 3) && !match; i++) {
-								if (!carr[i].seatArr[1].occupied && !match) {
+								if ((!carr[i].seatArr[1].occupied && !match) && Reservation_Records[count].point_val >= 3) {
 									carr[i].occupySeat(1);
 									Reservation_Records[count].point_val -= 3;
 									Reservation_Records[count].seat = 1;
 									Reservation_Records[count].vehicle_color = carr[i].color;
 									Reservation_Records[count].vehicle_type = "Compact";
 									match = true;
-								} else if (!carr[i].seatArr[2].occupied && !match) {
+								} else if ((!carr[i].seatArr[2].occupied && !match) && Reservation_Records[count].point_val >= 3) {
 									carr[i].occupySeat(2);
 									Reservation_Records[count].point_val -= 3;
 									Reservation_Records[count].seat = 2;
@@ -583,6 +621,7 @@ void modify_reservation() {
 	char car_type;
 	bool colorMatch = false;
 	bool match = false;
+	bool resMatch = false;
 	char seat_sel;
 	string car_color;
 
@@ -592,7 +631,7 @@ void modify_reservation() {
 
 	for (int count = 0; count < 24; count++) {
 		if (number == Reservation_Records[count].res_number) { // its a match
-
+			resMatch = true;
 			if (Reservation_Records[count].seat == 0) {
 				Reservation_Records[count].point_val = Reservation_Records[count].point_val + 5;
 
@@ -680,7 +719,8 @@ void modify_reservation() {
 					}
 				}
 			}
-
+			v.display(parr, carr, sarr);
+			cout << Reservation_Records[count].name << " has " << Reservation_Records[count].point_val << " points." << endl;
 			cout << "What car type? (P)ickup, (C)ompact, or (S)edan? ";
 			cin >> car_type;
 			cin.ignore();
@@ -823,9 +863,10 @@ void modify_reservation() {
 					cout << "ERROR! Car not found." << endl;
 				}
 			}
-		} else {
-			cout << "ERROR: Reservation number does not exist." << endl;
 		}
+	}
+	if(!resMatch){
+		cout << "ERROR: Reservation number does not exist." << endl;
 	}
 }
 /*
@@ -878,7 +919,8 @@ void update_points() {
 }
 
 void test_print() {
-	cout << Reservation_Records[0].name << "Point value " << Reservation_Records[0].point_val << " Seat number: "
-			<< Reservation_Records[0].seat << " Vehicle: " << Reservation_Records[0].vehicle_color
-			<< Reservation_Records[0].vehicle_type;
+	cout << Reservation_Records[0].name << endl;
+	cout << "Point value " << Reservation_Records[0].point_val << endl;
+	cout << " Seat number: " << Reservation_Records[0].seat << endl;
+	cout <<" Vehicle: " << Reservation_Records[0].vehicle_color << Reservation_Records[0].vehicle_type << endl;
 }

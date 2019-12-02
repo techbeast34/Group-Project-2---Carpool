@@ -108,8 +108,8 @@ void create_reservation();
 void update_points();
 void write_res_file();
 void modify_reservation();
-
-void test_display();
+void delete_reservation();
+void display_all();
 void test_print();
 
 #endif /* COMPILE_HEADER_H_ */

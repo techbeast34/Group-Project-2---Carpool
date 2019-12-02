@@ -112,8 +112,7 @@ void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 	}
 }
 
-// TODO Remove this - A function for testing display
-void test_dispaly() {
+void dispaly_all() {
 	v.display(parr, carr, sarr);
 }
 
@@ -886,6 +885,7 @@ void delete_reservation() {
 
 	cout << "Enter reservation to be deleted: ";
 	cin >> delete_res;
+	cin.ignore();
 
 	if (delete_res == 23) { // its the last value in the array
 		return;
@@ -902,6 +902,7 @@ void delete_reservation() {
 			cout << "ERROR: Reservation does not exist." << endl;
 		}
 	}
+
 }
 /*
  * update_points()

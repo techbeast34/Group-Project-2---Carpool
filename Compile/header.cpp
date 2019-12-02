@@ -189,6 +189,7 @@ void vehicle::print_vehicle_assign(pickup truckArr[], compact compArr[], sedan s
 
 }
 
+
 /*
  * vehicle::occupySeat()
  *
@@ -275,7 +276,7 @@ void vehicle::display(pickup truckArr[], compact compArr[], sedan sedArr[]) {
 	}
 }
 
-void dispaly_all() {
+void display_all() {
 	v.display(parr, carr, sarr);
 }
 

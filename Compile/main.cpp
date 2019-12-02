@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <stdlib.h>
 #include "header.h"
 
 using namespace std;
@@ -26,7 +27,7 @@ int main() {
 		cout << "Enter function wanted:" << endl;
 		cout << "1. Create a reservation   2. Display all vehicles        3. Modify a reservation" << endl;
 		cout << "4. Delete a reservation   5. Print Vehicle assignments   6. Reservation print (admin only)" << endl;
-		cout << "9. End program." << endl;
+		cout << "7. End program." << endl;
 
 		cout << endl;
 
@@ -48,8 +49,16 @@ int main() {
 		case 4:
 			delete_reservation();
 			break;
+		case 5:
+			print_veh_file();
+			break;
+		case 6:
+			write_res_file();
+			break;
+		case 7:
+			exit(0);
+			break;
 		}
-
 	}
 
 	update_points();

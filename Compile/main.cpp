@@ -7,17 +7,14 @@
  ************************************************/
 
 #include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <stdlib.h>
 #include "header.h"
 
 using namespace std;
 
 int main() {
 
-	bool flag = false;
-	int menu_sel;
+	bool flag = false; // flag to control the loop
+	int menu_sel; // the integer to select the function
 
 	read_reservation();
 
@@ -35,6 +32,7 @@ int main() {
 		cin >> menu_sel;
 		cin.ignore();
 
+		// switch case to determine which function is called
 		switch (menu_sel) {
 
 		case 1:
@@ -56,7 +54,7 @@ int main() {
 			write_res_file();
 			break;
 		case 7:
-			exit(0);
+			flag = true;
 			break;
 		}
 	}

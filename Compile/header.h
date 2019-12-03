@@ -18,9 +18,9 @@ struct seat {
 	int pointVal;  // the point value of the seat
 };
 
-class pickup;
-class compact;
-class sedan;
+class pickup; // pickup class
+class compact; // compact class
+class sedan; // sedan class
 
 // class of vehicle
 class vehicle {

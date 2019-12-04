@@ -135,7 +135,7 @@ void vehicle::print_vehicle_assign(pickup truckArr[], compact compArr[], sedan s
 		idx = menuSel - 7;
 		cout << "Assignments for " << sedArr[idx].color << " Sedan:" << endl;
 
-		filename = sedArr[idx].color + "_compact.txt";
+		filename = sedArr[idx].color + "_sedan.txt";
 		ofstream outFile(filename.c_str());
 
 		outFile << sedArr[idx].color << " sedan:" << endl;
